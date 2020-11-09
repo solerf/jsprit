@@ -24,6 +24,8 @@ import com.graphhopper.jsprit.core.problem.constraint.SoftActivityConstraint;
 import com.graphhopper.jsprit.core.problem.misc.JobInsertionContext;
 import com.graphhopper.jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import com.graphhopper.jsprit.core.problem.solution.route.activity.TourActivity;
+import com.graphhopper.jsprit.core.util.ActivityNoiseMaker;
+import com.graphhopper.jsprit.core.util.NoiseMaker;
 import com.graphhopper.jsprit.core.util.RandomNumberGeneration;
 
 import java.util.Collection;
@@ -32,7 +34,7 @@ import java.util.Random;
 /**
  * Created by schroeder on 16/01/15.
  */
-class ConcurrentInsertionNoiseMaker implements SoftActivityConstraint, IterationStartsListener {
+class ConcurrentInsertionNoiseMaker implements SoftActivityConstraint, IterationStartsListener, ActivityNoiseMaker {
 
     private final double noiseProbability;
 
@@ -68,12 +70,17 @@ class ConcurrentInsertionNoiseMaker implements SoftActivityConstraint, Iteration
     @Override
     public double getCosts(JobInsertionContext iFacts, TourActivity prevAct, TourActivity newAct, TourActivity nextAct, double prevActDepTime) {
         if (makeNoise) {
-            return noiseLevel * maxCosts * randomArray[newAct.getIndex()].nextDouble();
+            return makeNoise(newAct);
         }
         return 0;
     }
 
     public void setRandom(Random random) {
         this.random = random;
+    }
+
+    @Override
+    public double makeNoise(TourActivity newAct) {
+        return noiseLevel * maxCosts * randomArray[newAct.getIndex()].nextDouble();
     }
 }
