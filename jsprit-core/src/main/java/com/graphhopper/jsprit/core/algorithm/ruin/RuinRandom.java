@@ -38,11 +38,11 @@ import java.util.List;
 
 public final class RuinRandom extends AbstractRuinStrategy {
 
-    private Logger logger = LoggerFactory.getLogger(RuinRandom.class);
+    private final Logger logger = LoggerFactory.getLogger(RuinRandom.class);
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
-    private double fractionOfAllNodes2beRuined;
+    private final double fractionOfAllNodes2beRuined;
 
     /**
      * Constructs ruinRandom.

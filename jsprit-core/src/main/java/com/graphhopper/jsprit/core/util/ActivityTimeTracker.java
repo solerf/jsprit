@@ -25,7 +25,7 @@ import com.graphhopper.jsprit.core.problem.solution.route.activity.TourActivity;
 
 public class ActivityTimeTracker implements ActivityVisitor {
 
-    public static enum ActivityPolicy {
+    public enum ActivityPolicy {
 
         AS_SOON_AS_TIME_WINDOW_OPENS, AS_SOON_AS_ARRIVED
 
@@ -94,7 +94,7 @@ public class ActivityTimeTracker implements ActivityVisitor {
             operationStartTime = actArrTime;
         } else operationStartTime = actArrTime;
 
-        double operationEndTime = operationStartTime + activityCosts.getActivityDuration(activity,actArrTime,route.getDriver(),route.getVehicle());
+        double operationEndTime = operationStartTime + activityCosts.getActivityDuration(activity, actArrTime, route.getDriver(), route.getVehicle());
 
         actEndTime = operationEndTime;
 

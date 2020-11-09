@@ -107,9 +107,9 @@ public class ExperimentalSchrimpfAcceptance implements SolutionAcceptor, Iterati
         double now = System.currentTimeMillis();
         this.nOfTotalIterations = algorithm.getMaxIterations();
 
-		/*
+        /*
          * randomWalk to determine standardDev
-		 */
+         */
         final double[] results = new double[nOfRandomWalks];
 
         Jsprit.Builder builder = new GreedySchrimpfFactory().createGreedyAlgorithmBuilder(problem);

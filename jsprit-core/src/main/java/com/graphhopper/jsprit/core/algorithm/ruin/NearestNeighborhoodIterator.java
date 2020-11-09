@@ -29,11 +29,11 @@ import java.util.Iterator;
  */
 class NearestNeighborhoodIterator implements Iterator<Job> {
 
-    private static Logger log = LoggerFactory.getLogger(NearestNeighborhoodIterator.class);
+    private static final Logger log = LoggerFactory.getLogger(NearestNeighborhoodIterator.class);
 
-    private Iterator<ReferencedJob> jobIter;
+    private final Iterator<ReferencedJob> jobIter;
 
-    private int nJobs;
+    private final int nJobs;
 
     private int jobCount = 0;
 

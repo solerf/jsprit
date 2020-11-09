@@ -28,7 +28,7 @@ import com.graphhopper.jsprit.core.problem.Location;
  */
 public class CrowFlyCosts extends EuclideanCosts {
 
-    private Locations locations;
+    private final Locations locations;
 
     public CrowFlyCosts(Locations locations) {
         this.locations = locations;

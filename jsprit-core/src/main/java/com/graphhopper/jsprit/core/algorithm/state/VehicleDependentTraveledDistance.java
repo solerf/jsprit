@@ -61,7 +61,7 @@ public class VehicleDependentTraveledDistance implements StateUpdater, ActivityV
 
     private VehicleRoute route;
 
-    private List<Vehicle> uniqueVehicles;
+    private final List<Vehicle> uniqueVehicles;
 
     private Map<VehicleTypeKey, State> states;
 

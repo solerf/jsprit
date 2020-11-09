@@ -22,6 +22,6 @@ import com.graphhopper.jsprit.core.problem.solution.route.activity.TourActivity;
 
 public interface ActivityNoiseMaker {
 
-    public double makeNoise(TourActivity newAct);
+    double makeNoise(TourActivity newAct);
 
 }

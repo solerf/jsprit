@@ -33,7 +33,7 @@ import com.graphhopper.jsprit.core.problem.vehicle.Vehicle;
  */
 class AdditionalAccessEgressCalculator {
 
-    private VehicleRoutingTransportCosts routingCosts;
+    private final VehicleRoutingTransportCosts routingCosts;
 
     /**
      * Constructs the estimator that estimates additional access/egress costs when operating route with a new vehicle that has different start/end-location.

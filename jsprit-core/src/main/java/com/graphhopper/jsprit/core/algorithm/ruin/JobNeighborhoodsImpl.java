@@ -32,13 +32,13 @@ import java.util.*;
  */
 class JobNeighborhoodsImpl implements JobNeighborhoods {
 
-    private static Logger logger = LoggerFactory.getLogger(JobNeighborhoodsImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(JobNeighborhoodsImpl.class);
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
-    private Map<String, TreeSet<ReferencedJob>> distanceNodeTree = new HashMap<String, TreeSet<ReferencedJob>>();
+    private final Map<String, TreeSet<ReferencedJob>> distanceNodeTree = new HashMap<String, TreeSet<ReferencedJob>>();
 
-    private JobDistance jobDistance;
+    private final JobDistance jobDistance;
 
     private double maxDistance = 0.;
 

@@ -67,7 +67,7 @@ public final class BestInsertionConcurrent extends AbstractInsertionStrategy {
 
     }
 
-    private static Logger logger = LoggerFactory.getLogger(BestInsertionConcurrent.class);
+    private static final Logger logger = LoggerFactory.getLogger(BestInsertionConcurrent.class);
 
     private final static double NO_NEW_DEPARTURE_TIME_YET = -12345.12345;
 
@@ -75,13 +75,13 @@ public final class BestInsertionConcurrent extends AbstractInsertionStrategy {
 
     private final static Driver NO_NEW_DRIVER_YET = null;
 
-    private InsertionListeners insertionsListeners;
+    private final InsertionListeners insertionsListeners;
 
-    private JobInsertionCostsCalculator bestInsertionCostCalculator;
+    private final JobInsertionCostsCalculator bestInsertionCostCalculator;
 
-    private int nuOfBatches;
+    private final int nuOfBatches;
 
-    private ExecutorCompletionService<Insertion> completionService;
+    private final ExecutorCompletionService<Insertion> completionService;
 
     public BestInsertionConcurrent(JobInsertionCostsCalculator jobInsertionCalculator, ExecutorService executorService, int nuOfBatches, VehicleRoutingProblem vehicleRoutingProblem) {
         super(vehicleRoutingProblem);
@@ -146,8 +146,7 @@ public final class BestInsertionConcurrent extends AbstractInsertionStrategy {
             if (bestInsertion == null) {
                 badJobs.add(unassignedJob);
                 markUnassigned(unassignedJob, failedConstraintNames);
-            }
-            else insertJob(unassignedJob, bestInsertion.getInsertionData(), bestInsertion.getRoute());
+            } else insertJob(unassignedJob, bestInsertion.getInsertionData(), bestInsertion.getRoute());
         }
         return badJobs;
     }
@@ -177,8 +176,8 @@ public final class BestInsertionConcurrent extends AbstractInsertionStrategy {
         for (int i = 0; i < nuOfBatches; i++) batches.add(new Batch());
         /*
          * if route.size < nuOfBatches add as much routes as empty batches are available
-		 * else add one empty route anyway
-		 */
+         * else add one empty route anyway
+         */
         if (vehicleRoutes.size() < nuOfBatches) {
             int nOfNewRoutes = nuOfBatches - vehicleRoutes.size();
             for (int i = 0; i < nOfNewRoutes; i++) {
@@ -189,7 +188,7 @@ public final class BestInsertionConcurrent extends AbstractInsertionStrategy {
         }
         /*
          * distribute routes to batches equally
-		 */
+         */
         int count = 0;
         for (VehicleRoute route : vehicleRoutes) {
             if (count == nuOfBatches) count = 0;

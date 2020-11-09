@@ -30,9 +30,9 @@ import com.graphhopper.jsprit.core.problem.solution.route.activity.TourActivity;
  */
 class AdditionalTransportationCosts implements SoftActivityConstraint {
 
-    private VehicleRoutingTransportCosts routingCosts;
+    private final VehicleRoutingTransportCosts routingCosts;
 
-    private VehicleRoutingActivityCosts activityCosts;
+    private final VehicleRoutingActivityCosts activityCosts;
 
     /**
      * Constructs the calculator that calculates additional transportation costs induced by inserting new activity.
@@ -61,7 +61,7 @@ class AdditionalTransportationCosts implements SoftActivityConstraint {
         double tp_time_prevAct_newAct = routingCosts.getTransportTime(prevAct.getLocation(), newAct.getLocation(), depTimeAtPrevAct, iFacts.getNewDriver(), iFacts.getNewVehicle());
 
         double newAct_arrTime = depTimeAtPrevAct + tp_time_prevAct_newAct;
-        double newAct_endTime = Math.max(newAct_arrTime, newAct.getTheoreticalEarliestOperationStartTime()) + activityCosts.getActivityDuration(newAct,newAct_arrTime,iFacts.getNewDriver(),iFacts.getNewVehicle());
+        double newAct_endTime = Math.max(newAct_arrTime, newAct.getTheoreticalEarliestOperationStartTime()) + activityCosts.getActivityDuration(newAct, newAct_arrTime, iFacts.getNewDriver(), iFacts.getNewVehicle());
 
         //open routes
         if (nextAct instanceof End) {

@@ -35,11 +35,11 @@ public class SearchStrategy {
 
     public static class DiscoveredSolution {
 
-        private VehicleRoutingProblemSolution solution;
+        private final VehicleRoutingProblemSolution solution;
 
-        private boolean accepted;
+        private final boolean accepted;
 
-        private String strategyId;
+        private final String strategyId;
 
         public DiscoveredSolution(VehicleRoutingProblemSolution solution, boolean accepted, String strategyId) {
             super();
@@ -66,7 +66,7 @@ public class SearchStrategy {
         }
     }
 
-    private static Logger logger = LoggerFactory.getLogger(SearchStrategy.class);
+    private static final Logger logger = LoggerFactory.getLogger(SearchStrategy.class);
 
     private final Collection<SearchStrategyModule> searchStrategyModules = new ArrayList<SearchStrategyModule>();
 

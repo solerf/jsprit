@@ -104,7 +104,7 @@ public class VehicleDependentTraveledDistanceTest {
             new VehicleDependentTraveledDistance(vrp.getTransportCosts(), stateManager, traveledDistanceId, Arrays.asList(vehicle, vehicle2));
 
         stateManager.addStateUpdater(traveledDistance);
-        stateManager.informInsertionStarts(Arrays.asList(route), Collections.<Job>emptyList());
+        stateManager.informInsertionStarts(Arrays.asList(route), Collections.emptyList());
     }
 
     @Test

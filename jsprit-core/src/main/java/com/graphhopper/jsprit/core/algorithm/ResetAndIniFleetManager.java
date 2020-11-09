@@ -28,7 +28,7 @@ import java.util.Collection;
 
 public class ResetAndIniFleetManager implements InsertionStartsListener {
 
-    private VehicleFleetManager vehicleFleetManager;
+    private final VehicleFleetManager vehicleFleetManager;
 
     public ResetAndIniFleetManager(VehicleFleetManager vehicleFleetManager) {
         super();

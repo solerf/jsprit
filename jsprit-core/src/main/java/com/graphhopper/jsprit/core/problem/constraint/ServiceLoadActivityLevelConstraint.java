@@ -33,9 +33,9 @@ import com.graphhopper.jsprit.core.problem.solution.route.state.RouteAndActivity
  */
 public class ServiceLoadActivityLevelConstraint implements HardActivityConstraint {
 
-    private RouteAndActivityStateGetter stateManager;
+    private final RouteAndActivityStateGetter stateManager;
 
-    private Capacity defaultValue;
+    private final Capacity defaultValue;
 
     public ServiceLoadActivityLevelConstraint(RouteAndActivityStateGetter stateManager) {
         super();

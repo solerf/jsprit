@@ -34,7 +34,7 @@ import com.graphhopper.jsprit.core.util.ActivityTimeTracker;
  */
 public class UpdateActivityTimes implements ActivityVisitor, StateUpdater {
 
-    private ActivityTimeTracker timeTracker;
+    private final ActivityTimeTracker timeTracker;
 
     private VehicleRoute route;
 
@@ -49,7 +49,7 @@ public class UpdateActivityTimes implements ActivityVisitor, StateUpdater {
      */
     public UpdateActivityTimes(ForwardTransportTime transportTime, VehicleRoutingActivityCosts activityCosts) {
         super();
-        timeTracker = new ActivityTimeTracker(transportTime,activityCosts );
+        timeTracker = new ActivityTimeTracker(transportTime, activityCosts);
     }
 
     public UpdateActivityTimes(ForwardTransportTime transportTime, ActivityTimeTracker.ActivityPolicy activityPolicy, VehicleRoutingActivityCosts activityCosts) {

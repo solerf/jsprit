@@ -37,11 +37,11 @@ import java.util.*;
  */
 public final class RuinRadial extends AbstractRuinStrategy {
 
-    private Logger logger = LoggerFactory.getLogger(RuinRadial.class);
+    private final Logger logger = LoggerFactory.getLogger(RuinRadial.class);
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
-    private JobNeighborhoods jobNeighborhoods;
+    private final JobNeighborhoods jobNeighborhoods;
 
     private final int noJobsToMemorize;
 
@@ -129,7 +129,6 @@ public final class RuinRadial extends AbstractRuinStrategy {
 
     /**
      * Removes targetJob and its neighborhood and returns the removed jobs.
-     *
      */
     private Collection<Job> ruinRoutes(Collection<VehicleRoute> vehicleRoutes, Job targetJob, int nOfJobs2BeRemoved) {
         List<Job> unassignedJobs = new ArrayList<Job>();

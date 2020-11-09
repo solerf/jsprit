@@ -341,7 +341,7 @@ public class ShipmentInsertionCalculatorFlexTest {
 
         stateManager.informInsertionStarts(Arrays.asList(route), null);
 
-        Pickup service = (Pickup) Pickup.Builder.newInstance("pick").addSizeDimension(0, 1).setLocation(Location.newInstance("5,5")).build();
+        Pickup service = Pickup.Builder.newInstance("pick").addSizeDimension(0, 1).setLocation(Location.newInstance("5,5")).build();
 
         JobActivityFactory activityFactory = mock(JobActivityFactory.class);
         List<AbstractActivity> activities = new ArrayList<AbstractActivity>();

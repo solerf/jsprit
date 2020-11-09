@@ -41,15 +41,15 @@ public class InsertionBuilder {
         REGRET, BEST
     }
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
-    private StateManager stateManager;
+    private final StateManager stateManager;
 
     private boolean local = true;
 
-    private ConstraintManager constraintManager;
+    private final ConstraintManager constraintManager;
 
-    private VehicleFleetManager fleetManager;
+    private final VehicleFleetManager fleetManager;
 
     private double weightOfFixedCosts;
 
@@ -69,7 +69,7 @@ public class InsertionBuilder {
 
     private int nNeighbors;
 
-    private boolean timeScheduling = false;
+    private final boolean timeScheduling = false;
 
     private boolean allowVehicleSwitch = true;
 
@@ -181,23 +181,21 @@ public class InsertionBuilder {
             }
         } else if (strategy.equals(Strategy.REGRET)) {
             if (executor == null) {
-                if(isFastRegret){
+                if (isFastRegret) {
                     RegretInsertionFast regret = new RegretInsertionFast(costCalculator, vrp, fleetManager);
                     regret.setSwitchAllowed(allowVehicleSwitch);
                     insertion = regret;
-                }
-                else {
+                } else {
                     RegretInsertion regret = new RegretInsertion(costCalculator, vrp);
                     insertion = regret;
                 }
 
             } else {
-                if(isFastRegret){
+                if (isFastRegret) {
                     RegretInsertionConcurrentFast regret = new RegretInsertionConcurrentFast(costCalculator, vrp, executor, fleetManager);
                     regret.setSwitchAllowed(allowVehicleSwitch);
                     insertion = regret;
-                }
-                else{
+                } else {
                     RegretInsertionConcurrent regret = new RegretInsertionConcurrent(costCalculator, vrp, executor);
                     insertion = regret;
                 }

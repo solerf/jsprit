@@ -123,7 +123,7 @@ public class VehicleTypeImpl implements VehicleType {
             return new Builder(id);
         }
 
-        private String id;
+        private final String id;
         private double maxVelo = Double.MAX_VALUE;
         /**
          * default cost values for default vehicle type
@@ -136,7 +136,7 @@ public class VehicleTypeImpl implements VehicleType {
 
         private String profile = "car";
 
-        private Capacity.Builder capacityBuilder = Capacity.Builder.newInstance();
+        private final Capacity.Builder capacityBuilder = Capacity.Builder.newInstance();
 
         private Capacity capacityDimensions = null;
 
@@ -157,9 +157,8 @@ public class VehicleTypeImpl implements VehicleType {
          * but never interacts with it in any way.
          * </p>
          *
-         * @param userData
-         *            any object holding the domain specific user data
-         *            associated with the object.
+         * @param userData any object holding the domain specific user data
+         *                 associated with the object.
          * @return builder
          */
         public Builder setUserData(Object userData) {
@@ -173,8 +172,7 @@ public class VehicleTypeImpl implements VehicleType {
          *
          * @param inMeterPerSeconds in m/s
          * @return this builder
-         * @throws IllegalArgumentException
-         *             if velocity is smaller than zero
+         * @throws IllegalArgumentException if velocity is smaller than zero
          */
         public VehicleTypeImpl.Builder setMaxVelocity(double inMeterPerSeconds) {
             if (inMeterPerSeconds < 0.0)
@@ -282,10 +280,10 @@ public class VehicleTypeImpl implements VehicleType {
          * Adds a capacity dimension.
          *
          * @param dimIndex dimension index
-         * @param dimVal dimension value
+         * @param dimVal   dimension value
          * @return the builder
          * @throws IllegalArgumentException if dimVal < 0
-         * @throws IllegalArgumentException    if capacity dimension is already set
+         * @throws IllegalArgumentException if capacity dimension is already set
          */
         public Builder addCapacityDimension(int dimIndex, int dimVal) {
             if (dimVal < 0) throw new IllegalArgumentException("The capacity value must not be negative.");
@@ -361,7 +359,7 @@ public class VehicleTypeImpl implements VehicleType {
 
     private final double maxVelocity;
 
-    private Object userData;
+    private final Object userData;
 
     /**
      * priv constructor constructing vehicle-type

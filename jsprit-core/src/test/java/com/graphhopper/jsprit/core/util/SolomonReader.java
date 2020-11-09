@@ -51,7 +51,7 @@ public class SolomonReader {
         this.variableCostProjectionFactor = costProjectionFactor;
     }
 
-    private static Logger logger = LoggerFactory.getLogger(SolomonReader.class);
+    private static final Logger logger = LoggerFactory.getLogger(SolomonReader.class);
 
     private final VehicleRoutingProblem.Builder vrpBuilder;
 

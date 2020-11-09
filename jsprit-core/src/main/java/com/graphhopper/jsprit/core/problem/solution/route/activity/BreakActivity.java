@@ -105,7 +105,7 @@ public class BreakActivity extends AbstractActivity implements TourActivity.JobA
         return duration;
     }
 
-    public void setOperationTime(double duration){
+    public void setOperationTime(double duration) {
         this.duration = duration;
     }
 

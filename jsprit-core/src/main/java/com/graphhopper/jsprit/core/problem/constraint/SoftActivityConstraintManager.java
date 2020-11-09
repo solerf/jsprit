@@ -26,7 +26,7 @@ import java.util.Collections;
 
 class SoftActivityConstraintManager implements SoftActivityConstraint {
 
-    private Collection<SoftActivityConstraint> softConstraints = new ArrayList<SoftActivityConstraint>();
+    private final Collection<SoftActivityConstraint> softConstraints = new ArrayList<SoftActivityConstraint>();
 
     public void addConstraint(SoftActivityConstraint constraint) {
         softConstraints.add(constraint);

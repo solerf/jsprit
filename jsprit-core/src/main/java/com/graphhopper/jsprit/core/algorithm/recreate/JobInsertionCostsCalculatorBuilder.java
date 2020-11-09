@@ -37,14 +37,14 @@ public class JobInsertionCostsCalculatorBuilder {
 
     private static class CalculatorPlusListeners {
 
-        private JobInsertionCostsCalculator calculator;
+        private final JobInsertionCostsCalculator calculator;
 
         public JobInsertionCostsCalculator getCalculator() {
             return calculator;
         }
 
-        private List<PrioritizedVRAListener> algorithmListener = new ArrayList<PrioritizedVRAListener>();
-        private List<InsertionListener> insertionListener = new ArrayList<InsertionListener>();
+        private final List<PrioritizedVRAListener> algorithmListener = new ArrayList<PrioritizedVRAListener>();
+        private final List<InsertionListener> insertionListener = new ArrayList<InsertionListener>();
 
         public CalculatorPlusListeners(JobInsertionCostsCalculator calculator) {
             super();
@@ -60,9 +60,9 @@ public class JobInsertionCostsCalculatorBuilder {
         }
     }
 
-    private List<InsertionListener> insertionListeners;
+    private final List<InsertionListener> insertionListeners;
 
-    private List<PrioritizedVRAListener> algorithmListeners;
+    private final List<PrioritizedVRAListener> algorithmListeners;
 
     private VehicleRoutingProblem vrp;
 

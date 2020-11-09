@@ -47,7 +47,7 @@ public class TimeTermination implements PrematureAlgorithmTermination, Algorithm
 
     }
 
-    private static Logger logger = LoggerFactory.getLogger(TimeTermination.class);
+    private static final Logger logger = LoggerFactory.getLogger(TimeTermination.class);
 
     private final long timeThreshold;
 

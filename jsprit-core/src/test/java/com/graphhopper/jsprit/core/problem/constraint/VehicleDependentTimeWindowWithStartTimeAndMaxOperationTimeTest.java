@@ -131,8 +131,8 @@ public class VehicleDependentTimeWindowWithStartTimeAndMaxOperationTimeTest {
 
         });
         stateManager.addStateUpdater(timeWindow_updater);
-        stateManager.addStateUpdater(new UpdateActivityTimes(routingCosts,activityCosts));
-        stateManager.informInsertionStarts(Arrays.asList(route), Collections.<Job>emptyList());
+        stateManager.addStateUpdater(new UpdateActivityTimes(routingCosts, activityCosts));
+        stateManager.informInsertionStarts(Arrays.asList(route), Collections.emptyList());
     }
 
     @Test

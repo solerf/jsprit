@@ -54,17 +54,17 @@ final class ServiceInsertionOnRouteLevelCalculator implements JobInsertionCostsC
 
     private final VehicleRoutingActivityCosts activityCosts;
 
-    private AuxilliaryCostCalculator auxilliaryPathCostCalculator;
+    private final AuxilliaryCostCalculator auxilliaryPathCostCalculator;
 
     private JobActivityFactory activityFactory;
 
     private RouteAndActivityStateGetter stateManager;
 
-    private HardRouteConstraint hardRouteLevelConstraint;
+    private final HardRouteConstraint hardRouteLevelConstraint;
 
-    private HardActivityConstraint hardActivityLevelConstraint;
+    private final HardActivityConstraint hardActivityLevelConstraint;
 
-    private ActivityInsertionCostsCalculator activityInsertionCostsCalculator;
+    private final ActivityInsertionCostsCalculator activityInsertionCostsCalculator;
 
     private int nuOfActsForwardLooking = 0;
     //
@@ -204,7 +204,7 @@ final class ServiceInsertionOnRouteLevelCalculator implements JobInsertionCostsC
             /**
              * departure time at nextAct with new vehicle
              */
-            double depTime_nextAct_newVehicle = Math.max(arrTime_nextAct_newVehicle, nextAct.getTheoreticalEarliestOperationStartTime()) + activityCosts.getActivityDuration(nextAct, arrTime_nextAct_newVehicle,newDriver,newVehicle);
+            double depTime_nextAct_newVehicle = Math.max(arrTime_nextAct_newVehicle, nextAct.getTheoreticalEarliestOperationStartTime()) + activityCosts.getActivityDuration(nextAct, arrTime_nextAct_newVehicle, newDriver, newVehicle);
 
             /**
              * set previous to next

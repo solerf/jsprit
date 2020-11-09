@@ -129,7 +129,6 @@ public class Jsprit {
         PROPORTION_UNASSIGNED("proportion_unassigned");
 
 
-
         String paraName;
 
         Parameter(String name) {
@@ -148,7 +147,7 @@ public class Jsprit {
 
     public static class Builder {
 
-        private VehicleRoutingProblem vrp;
+        private final VehicleRoutingProblem vrp;
 
         private ExecutorService es;
 
@@ -160,7 +159,7 @@ public class Jsprit {
 
         private SolutionCostCalculator objectiveFunction = null;
 
-        private Properties properties;
+        private final Properties properties;
 
         private boolean addConstraints = true;
 
@@ -172,7 +171,7 @@ public class Jsprit {
 
         private ScoringFunction regretScorer = null;
 
-        private Map<SearchStrategy, Double> customStrategies = new HashMap<>();
+        private final Map<SearchStrategy, Double> customStrategies = new HashMap<>();
 
         private VehicleFleetManager fleetManager = null;
 
@@ -259,7 +258,7 @@ public class Jsprit {
             return this;
         }
 
-        public Builder setCustomAcceptor(SolutionAcceptor acceptor){
+        public Builder setCustomAcceptor(SolutionAcceptor acceptor) {
             this.solutionAcceptor = acceptor;
             return this;
         }
@@ -316,13 +315,11 @@ public class Jsprit {
 
     }
 
-    static class RuinShareFactoryImpl implements RuinShareFactory
+    static class RuinShareFactoryImpl implements RuinShareFactory {
 
-    {
+        private final int maxShare;
 
-        private int maxShare;
-
-        private int minShare;
+        private final int minShare;
 
         private Random random = RandomNumberGeneration.getRandom();
 
@@ -362,13 +359,13 @@ public class Jsprit {
 
     private boolean setupExecutorInternally = false;
 
-    private boolean addCoreConstraints;
+    private final boolean addCoreConstraints;
 
-    private SolutionCostCalculator objectiveFunction;
+    private final SolutionCostCalculator objectiveFunction;
 
-    private Properties properties;
+    private final Properties properties;
 
-    private Random random;
+    private final Random random;
 
     private SolutionAcceptor acceptor;
 
@@ -441,10 +438,9 @@ public class Jsprit {
         jobNeighborhoods.initialise();
 
         final double maxCosts;
-        if(properties.containsKey(Parameter.MAX_TRANSPORT_COSTS.toString())){
+        if (properties.containsKey(Parameter.MAX_TRANSPORT_COSTS.toString())) {
             maxCosts = Double.parseDouble(getProperty(Parameter.MAX_TRANSPORT_COSTS.toString()));
-        }
-        else{
+        } else {
             maxCosts = jobNeighborhoods.getMaxDistance();
         }
 
@@ -464,33 +460,33 @@ public class Jsprit {
         RuinRadial radial = new RuinRadial(vrp, vrp.getJobs().size(), jobNeighborhoods);
         radial.setRandom(random);
         radial.setRuinShareFactory(new RuinShareFactoryImpl(
-                toInteger(properties.getProperty(Parameter.RADIAL_MIN_SHARE.toString())),
-                toInteger(properties.getProperty(Parameter.RADIAL_MAX_SHARE.toString())),
-                random)
+            toInteger(properties.getProperty(Parameter.RADIAL_MIN_SHARE.toString())),
+            toInteger(properties.getProperty(Parameter.RADIAL_MAX_SHARE.toString())),
+            random)
         );
 
         final RuinRandom random_for_regret = new RuinRandom(vrp, 0.5);
         random_for_regret.setRandom(random);
         random_for_regret.setRuinShareFactory(new RuinShareFactoryImpl(
-                toInteger(properties.getProperty(Parameter.RANDOM_REGRET_MIN_SHARE.toString())),
-                toInteger(properties.getProperty(Parameter.RANDOM_REGRET_MAX_SHARE.toString())),
-                random)
+            toInteger(properties.getProperty(Parameter.RANDOM_REGRET_MIN_SHARE.toString())),
+            toInteger(properties.getProperty(Parameter.RANDOM_REGRET_MAX_SHARE.toString())),
+            random)
         );
 
         final RuinRandom random_for_best = new RuinRandom(vrp, 0.5);
         random_for_best.setRandom(random);
         random_for_best.setRuinShareFactory(new RuinShareFactoryImpl(
-                toInteger(properties.getProperty(Parameter.RANDOM_BEST_MIN_SHARE.toString())),
-                toInteger(properties.getProperty(Parameter.RANDOM_BEST_MAX_SHARE.toString())),
-                random)
+            toInteger(properties.getProperty(Parameter.RANDOM_BEST_MIN_SHARE.toString())),
+            toInteger(properties.getProperty(Parameter.RANDOM_BEST_MAX_SHARE.toString())),
+            random)
         );
 
         final RuinWorst worst = new RuinWorst(vrp, (int) (vrp.getJobs().values().size() * 0.5));
         worst.setRandom(random);
         worst.setRuinShareFactory(new RuinShareFactoryImpl(
-                toInteger(properties.getProperty(Parameter.WORST_MIN_SHARE.toString())),
-                toInteger(properties.getProperty(Parameter.WORST_MAX_SHARE.toString())),
-                random)
+            toInteger(properties.getProperty(Parameter.WORST_MIN_SHARE.toString())),
+            toInteger(properties.getProperty(Parameter.WORST_MAX_SHARE.toString())),
+            random)
         );
         IterationStartsListener noise = (i, problem, solutions) -> worst.setNoiseMaker(() -> {
             if (random.nextDouble() < toDouble(getProperty(Parameter.RUIN_WORST_NOISE_PROB.toString()))) {
@@ -502,9 +498,9 @@ public class Jsprit {
         final RuinClusters clusters = new RuinClusters(vrp, (int) (vrp.getJobs().values().size() * 0.5), jobNeighborhoods);
         clusters.setRandom(random);
         clusters.setRuinShareFactory(new RuinShareFactoryImpl(
-                toInteger(properties.getProperty(Parameter.WORST_MIN_SHARE.toString())),
-                toInteger(properties.getProperty(Parameter.WORST_MAX_SHARE.toString())),
-                random)
+            toInteger(properties.getProperty(Parameter.WORST_MIN_SHARE.toString())),
+            toInteger(properties.getProperty(Parameter.WORST_MAX_SHARE.toString())),
+            random)
         );
 
         int kMin = toInteger(properties.getProperty(Parameter.STRING_K_MIN.toString()));
@@ -522,7 +518,7 @@ public class Jsprit {
 
         boolean fastRegret = Boolean.parseBoolean(getProperty(Parameter.FAST_REGRET.toString()));
         if (es != null) {
-            if(fastRegret){
+            if (fastRegret) {
                 RegretInsertionConcurrentFast regretInsertion = (RegretInsertionConcurrentFast) new InsertionStrategyBuilder(vrp, vehicleFleetManager, stateManager, constraintManager)
                     .setInsertionStrategy(InsertionStrategyBuilder.Strategy.REGRET)
                     .setConcurrentMode(es, noThreads)
@@ -535,8 +531,7 @@ public class Jsprit {
                 regretInsertion.setScoringFunction(scorer);
                 regretInsertion.setDependencyTypes(constraintManager.getDependencyTypes());
                 regret = regretInsertion;
-            }
-            else {
+            } else {
                 RegretInsertionConcurrent regretInsertion = (RegretInsertionConcurrent) new InsertionStrategyBuilder(vrp, vehicleFleetManager, stateManager, constraintManager)
                     .setInsertionStrategy(InsertionStrategyBuilder.Strategy.REGRET)
                     .setConcurrentMode(es, noThreads)
@@ -549,7 +544,7 @@ public class Jsprit {
                 regret = regretInsertion;
             }
         } else {
-            if(fastRegret) {
+            if (fastRegret) {
                 RegretInsertionFast regretInsertion = (RegretInsertionFast) new InsertionStrategyBuilder(vrp, vehicleFleetManager, stateManager, constraintManager)
                     .setInsertionStrategy(InsertionStrategyBuilder.Strategy.REGRET)
                     .setFastRegret(true)
@@ -561,8 +556,7 @@ public class Jsprit {
                 regretInsertion.setScoringFunction(scorer);
                 regretInsertion.setDependencyTypes(constraintManager.getDependencyTypes());
                 regret = regretInsertion;
-            }
-            else{
+            } else {
                 RegretInsertion regretInsertion = (RegretInsertion) new InsertionStrategyBuilder(vrp, vehicleFleetManager, stateManager, constraintManager)
                     .setInsertionStrategy(InsertionStrategyBuilder.Strategy.REGRET)
                     .setAllowVehicleSwitch(toBoolean(getProperty(Parameter.VEHICLE_SWITCH.toString())))
@@ -598,7 +592,7 @@ public class Jsprit {
         best.setRandom(random);
 
         IterationStartsListener schrimpfThreshold = null;
-        if(acceptor == null) {
+        if (acceptor == null) {
             final SchrimpfAcceptance schrimpfAcceptance = new SchrimpfAcceptance(1, toDouble(getProperty(Parameter.THRESHOLD_ALPHA.toString())));
             if (properties.containsKey(Parameter.THRESHOLD_INI_ABS.toString())) {
                 schrimpfAcceptance.setInitialThreshold(Double.valueOf(properties.getProperty(Parameter.THRESHOLD_INI_ABS.toString())));
@@ -673,7 +667,7 @@ public class Jsprit {
 
 
         VehicleRoutingAlgorithm vra = prettyBuilder.build();
-        if(schrimpfThreshold != null) {
+        if (schrimpfThreshold != null) {
             vra.addListener(schrimpfThreshold);
         }
         vra.addListener(noiseConfigurator);
@@ -681,7 +675,7 @@ public class Jsprit {
         vra.addListener(clusters);
         if (increasingAbsoluteFixedCosts != null) vra.addListener(increasingAbsoluteFixedCosts);
 
-        if(toBoolean(getProperty(Parameter.BREAK_SCHEDULING.toString()))) {
+        if (toBoolean(getProperty(Parameter.BREAK_SCHEDULING.toString()))) {
             vra.addListener(new BreakScheduling(vrp, stateManager, constraintManager));
         }
         handleExecutorShutdown(vra);
@@ -784,7 +778,7 @@ public class Jsprit {
                         }
                     }
                 }
-                for(Job j : solution.getUnassignedJobs()){
+                for (Job j : solution.getUnassignedJobs()) {
                     costs += maxCosts * 2 * (11 - j.getPriority());
                 }
                 return costs;

@@ -26,7 +26,7 @@ import java.util.Collection;
  */
 public class FiniteFleetManagerFactory implements VehicleFleetManagerFactory {
 
-    private Collection<Vehicle> vehicles;
+    private final Collection<Vehicle> vehicles;
 
     /**
      * Constucts the factory.

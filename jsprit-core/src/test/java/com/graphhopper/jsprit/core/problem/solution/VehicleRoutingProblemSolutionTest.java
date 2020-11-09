@@ -43,13 +43,13 @@ public class VehicleRoutingProblemSolutionTest {
 
     @Test
     public void whenSettingSolutionCostsTo10_solutionCostsShouldBe10() {
-        VehicleRoutingProblemSolution sol = new VehicleRoutingProblemSolution(Collections.<VehicleRoute>emptyList(), 10.0);
+        VehicleRoutingProblemSolution sol = new VehicleRoutingProblemSolution(Collections.emptyList(), 10.0);
         assertEquals(10.0, sol.getCost(), 0.01);
     }
 
     @Test
     public void whenCreatingSolWithCostsOf10AndSettingCostsAfterwardsTo20_solutionCostsShouldBe20() {
-        VehicleRoutingProblemSolution sol = new VehicleRoutingProblemSolution(Collections.<VehicleRoute>emptyList(), 10.0);
+        VehicleRoutingProblemSolution sol = new VehicleRoutingProblemSolution(Collections.emptyList(), 10.0);
         sol.setCost(20.0);
         assertEquals(20.0, sol.getCost(), 0.01);
     }
@@ -59,7 +59,7 @@ public class VehicleRoutingProblemSolutionTest {
         Job badJob = mock(Job.class);
         List<Job> badJobs = new ArrayList<Job>();
         badJobs.add(badJob);
-        VehicleRoutingProblemSolution sol = new VehicleRoutingProblemSolution(Collections.<VehicleRoute>emptyList(), badJobs, 10.0);
+        VehicleRoutingProblemSolution sol = new VehicleRoutingProblemSolution(Collections.emptyList(), badJobs, 10.0);
         assertEquals(1, sol.getUnassignedJobs().size());
     }
 
@@ -68,7 +68,7 @@ public class VehicleRoutingProblemSolutionTest {
         Job badJob = mock(Job.class);
         List<Job> badJobs = new ArrayList<Job>();
         badJobs.add(badJob);
-        VehicleRoutingProblemSolution sol = new VehicleRoutingProblemSolution(Collections.<VehicleRoute>emptyList(), 10.0);
+        VehicleRoutingProblemSolution sol = new VehicleRoutingProblemSolution(Collections.emptyList(), 10.0);
         sol.getUnassignedJobs().addAll(badJobs);
         assertEquals(1, sol.getUnassignedJobs().size());
     }
@@ -78,7 +78,7 @@ public class VehicleRoutingProblemSolutionTest {
         Job badJob = mock(Job.class);
         List<Job> badJobs = new ArrayList<Job>();
         badJobs.add(badJob);
-        VehicleRoutingProblemSolution sol = new VehicleRoutingProblemSolution(Collections.<VehicleRoute>emptyList(), badJobs, 10.0);
+        VehicleRoutingProblemSolution sol = new VehicleRoutingProblemSolution(Collections.emptyList(), badJobs, 10.0);
         Assert.assertEquals(badJob, sol.getUnassignedJobs().iterator().next());
     }
 
@@ -87,7 +87,7 @@ public class VehicleRoutingProblemSolutionTest {
         Job badJob = mock(Job.class);
         List<Job> badJobs = new ArrayList<Job>();
         badJobs.add(badJob);
-        VehicleRoutingProblemSolution sol = new VehicleRoutingProblemSolution(Collections.<VehicleRoute>emptyList(), 10.0);
+        VehicleRoutingProblemSolution sol = new VehicleRoutingProblemSolution(Collections.emptyList(), 10.0);
         sol.getUnassignedJobs().addAll(badJobs);
         Assert.assertEquals(badJob, sol.getUnassignedJobs().iterator().next());
     }

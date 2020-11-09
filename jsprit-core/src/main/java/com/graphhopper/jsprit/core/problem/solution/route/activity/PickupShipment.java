@@ -23,9 +23,9 @@ import com.graphhopper.jsprit.core.problem.Location;
 import com.graphhopper.jsprit.core.problem.job.Job;
 import com.graphhopper.jsprit.core.problem.job.Shipment;
 
-public final class PickupShipment extends AbstractActivity implements PickupActivity{
+public final class PickupShipment extends AbstractActivity implements PickupActivity {
 
-    private Shipment shipment;
+    private final Shipment shipment;
 
     private double endTime;
 

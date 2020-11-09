@@ -27,13 +27,13 @@ import com.graphhopper.jsprit.core.problem.vehicle.Vehicle;
  */
 class InsertBreak implements Event {
 
-    private VehicleRoute vehicleRoute;
+    private final VehicleRoute vehicleRoute;
 
-    private Vehicle newVehicle;
+    private final Vehicle newVehicle;
 
-    private TourActivity activity;
+    private final TourActivity activity;
 
-    private int index;
+    private final int index;
 
     public InsertBreak(VehicleRoute vehicleRoute, Vehicle newVehicle, TourActivity activity, int index) {
         this.vehicleRoute = vehicleRoute;

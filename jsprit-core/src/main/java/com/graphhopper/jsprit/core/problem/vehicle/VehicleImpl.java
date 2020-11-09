@@ -42,9 +42,9 @@ public class VehicleImpl extends AbstractVehicle {
      */
     public static class NoVehicle extends AbstractVehicle {
 
-        private String id = "noVehicle";
+        private final String id = "noVehicle";
 
-        private VehicleType type = VehicleTypeImpl.Builder.newInstance("noType").build();
+        private final VehicleType type = VehicleTypeImpl.Builder.newInstance("noType").build();
 
         @Override
         public double getEarliestDeparture() {
@@ -105,7 +105,7 @@ public class VehicleImpl extends AbstractVehicle {
      */
     public static class Builder {
 
-        private String id;
+        private final String id;
 
         private double earliestStart = 0.0;
 
@@ -115,7 +115,7 @@ public class VehicleImpl extends AbstractVehicle {
 
         private VehicleType type = VehicleTypeImpl.Builder.newInstance("default").build();
 
-        private Skills.Builder skillBuilder = Skills.Builder.newInstance();
+        private final Skills.Builder skillBuilder = Skills.Builder.newInstance();
 
         private Skills skills;
 
@@ -194,8 +194,7 @@ public class VehicleImpl extends AbstractVehicle {
          * If returnToDepot is false, the end-location of the vehicle is
          * endogenous.
          *
-         * @param returnToDepot
-         *            true if vehicle need to return to depot, otherwise false
+         * @param returnToDepot true if vehicle need to return to depot, otherwise false
          * @return this builder
          */
         public Builder setReturnToDepot(boolean returnToDepot) {
@@ -273,7 +272,7 @@ public class VehicleImpl extends AbstractVehicle {
          *
          * @return vehicle
          * @throws IllegalArgumentException if both locationId and locationCoord is not set or (endLocationCoord!=null AND returnToDepot=false)
-         *                               or (endLocationId!=null AND returnToDepot=false)
+         *                                  or (endLocationId!=null AND returnToDepot=false)
          */
         public VehicleImpl build() {
             if (latestArrival < earliestStart)
@@ -468,11 +467,8 @@ public class VehicleImpl extends AbstractVehicle {
         } else if (!id.equals(other.id))
             return false;
         if (type == null) {
-            if (other.type != null)
-                return false;
-        } else if (!type.equals(other.type))
-            return false;
-        return true;
+            return other.type == null;
+        } else return type.equals(other.type);
     }
 
 }

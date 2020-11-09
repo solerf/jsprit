@@ -299,7 +299,7 @@ public class TestVehicleRoute {
     @Test
     public void whenAddingPickup_itShouldBeTreatedAsPickup() {
 
-        Pickup pickup = (Pickup) Pickup.Builder.newInstance("pick").setLocation(Location.newInstance("pickLoc")).build();
+        Pickup pickup = Pickup.Builder.newInstance("pick").setLocation(Location.newInstance("pickLoc")).build();
         VehicleImpl vehicle = VehicleImpl.Builder.newInstance("vehicle").setStartLocation(Location.newInstance("startLoc")).build();
         VehicleRoute route = VehicleRoute.Builder.newInstance(vehicle).addService(pickup).build();
 
@@ -313,7 +313,7 @@ public class TestVehicleRoute {
     @Test
     public void whenAddingPickup_itShouldBeAdded() {
 
-        Pickup pickup = (Pickup) Pickup.Builder.newInstance("pick").setLocation(Location.newInstance("pickLoc")).build();
+        Pickup pickup = Pickup.Builder.newInstance("pick").setLocation(Location.newInstance("pickLoc")).build();
         VehicleImpl vehicle = VehicleImpl.Builder.newInstance("vehicle").setStartLocation(Location.newInstance("startLoc")).build();
         VehicleRoute route = VehicleRoute.Builder.newInstance(vehicle).addPickup(pickup).build();
 
@@ -327,7 +327,7 @@ public class TestVehicleRoute {
     @Test
     public void whenAddingDelivery_itShouldBeTreatedAsDelivery() {
 
-        Delivery delivery = (Delivery) Delivery.Builder.newInstance("delivery").setLocation(Location.newInstance("deliveryLoc")).build();
+        Delivery delivery = Delivery.Builder.newInstance("delivery").setLocation(Location.newInstance("deliveryLoc")).build();
         VehicleImpl vehicle = VehicleImpl.Builder.newInstance("vehicle").setStartLocation(Location.newInstance("startLoc")).build();
         VehicleRoute route = VehicleRoute.Builder.newInstance(vehicle).addService(delivery).build();
 
@@ -341,7 +341,7 @@ public class TestVehicleRoute {
     @Test
     public void whenAddingDelivery_itShouldBeAdded() {
 
-        Delivery delivery = (Delivery) Delivery.Builder.newInstance("delivery").setLocation(Location.newInstance("deliveryLoc")).build();
+        Delivery delivery = Delivery.Builder.newInstance("delivery").setLocation(Location.newInstance("deliveryLoc")).build();
         VehicleImpl vehicle = VehicleImpl.Builder.newInstance("vehicle").setStartLocation(Location.newInstance("startLoc")).build();
         VehicleRoute route = VehicleRoute.Builder.newInstance(vehicle).addDelivery(delivery).build();
 

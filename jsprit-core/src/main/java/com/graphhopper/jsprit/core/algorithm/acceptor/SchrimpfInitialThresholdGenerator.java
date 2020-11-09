@@ -33,11 +33,11 @@ import java.util.Collection;
 
 public class SchrimpfInitialThresholdGenerator implements AlgorithmStartsListener {
 
-    private static Logger logger = LoggerFactory.getLogger(SchrimpfInitialThresholdGenerator.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(SchrimpfInitialThresholdGenerator.class.getName());
 
-    private SchrimpfAcceptance schrimpfAcceptance;
+    private final SchrimpfAcceptance schrimpfAcceptance;
 
-    private int nOfRandomWalks;
+    private final int nOfRandomWalks;
 
     public SchrimpfInitialThresholdGenerator(SchrimpfAcceptance schrimpfAcceptance, int nOfRandomWalks) {
         super();
@@ -50,9 +50,9 @@ public class SchrimpfInitialThresholdGenerator implements AlgorithmStartsListene
         logger.info("prepare schrimpfAcceptanceFunction, i.e. determine initial threshold");
         double now = System.currentTimeMillis();
 
-		/*
+        /*
          * randomWalk to determine standardDev
-		 */
+         */
         final double[] results = new double[nOfRandomWalks];
 
         Jsprit.Builder builder = new GreedySchrimpfFactory().createGreedyAlgorithmBuilder(problem);

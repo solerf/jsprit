@@ -18,8 +18,6 @@
 package com.graphhopper.jsprit.core.util;
 
 
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +34,7 @@ import java.net.URL;
  */
 public class Resource {
 
-    private static Logger log = LoggerFactory.getLogger(Resource.class);
+    private static final Logger log = LoggerFactory.getLogger(Resource.class);
 
     public final static URL getAsURL(final String filename) {
         URL url = Resource.class.getClassLoader().getResource(filename);

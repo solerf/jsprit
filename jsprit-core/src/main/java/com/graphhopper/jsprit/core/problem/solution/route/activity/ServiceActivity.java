@@ -109,11 +109,8 @@ public class ServiceActivity extends AbstractActivity implements TourActivity.Jo
             return false;
         ServiceActivity other = (ServiceActivity) obj;
         if (service == null) {
-            if (other.service != null)
-                return false;
-        } else if (!service.equals(other.service))
-            return false;
-        return true;
+            return other.service == null;
+        } else return service.equals(other.service);
     }
 
     public double getTheoreticalEarliestOperationStartTime() {

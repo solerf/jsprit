@@ -28,7 +28,7 @@ public interface HardActivityConstraint extends HardConstraint {
     /**
      * Indicates whether a hard activity constraint is fulfilled or not
      */
-    static enum ConstraintsStatus {
+    enum ConstraintsStatus {
 
         NOT_FULFILLED_BREAK, NOT_FULFILLED, FULFILLED
 
@@ -78,6 +78,6 @@ public interface HardActivityConstraint extends HardConstraint {
      * @param prevActDepTime the departure time at previous activity (prevAct) with the new vehicle (iFacts.getNewVehicle())
      * @return fulfilled if hard constraint is met, other not fulfilled.
      */
-    public ConstraintsStatus fulfilled(JobInsertionContext iFacts, TourActivity prevAct, TourActivity newAct, TourActivity nextAct, double prevActDepTime);
+    ConstraintsStatus fulfilled(JobInsertionContext iFacts, TourActivity prevAct, TourActivity newAct, TourActivity nextAct, double prevActDepTime);
 
 }

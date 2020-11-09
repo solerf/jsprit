@@ -30,7 +30,7 @@ public class UpdateSkills implements StateUpdater, ActivityVisitor {
 
     private Skills.Builder skillBuilder;
 
-    private StateManager statesManager;
+    private final StateManager statesManager;
 
     private VehicleRoute route;
 

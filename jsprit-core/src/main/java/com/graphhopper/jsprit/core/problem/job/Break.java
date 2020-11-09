@@ -67,7 +67,7 @@ public class Break extends Service {
 
     }
 
-    private boolean variableLocation;
+    private final boolean variableLocation;
 
     Break(Builder builder) {
         super(builder);

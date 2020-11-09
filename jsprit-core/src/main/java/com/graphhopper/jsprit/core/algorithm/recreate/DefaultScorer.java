@@ -27,15 +27,15 @@ import com.graphhopper.jsprit.core.problem.solution.route.activity.TimeWindow;
 /**
  * Created by schroeder on 15/10/15.
  */
-public class DefaultScorer implements ScoringFunction  {
+public class DefaultScorer implements ScoringFunction {
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
     private double timeWindowParam = -0.5;
 
     private double depotDistanceParam = +0.1;
 
-    private double minTimeWindowScore = -100000;
+    private final double minTimeWindowScore = -100000;
 
     public DefaultScorer(VehicleRoutingProblem vrp) {
         this.vrp = vrp;

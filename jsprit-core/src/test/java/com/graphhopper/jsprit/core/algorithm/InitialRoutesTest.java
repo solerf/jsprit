@@ -57,11 +57,11 @@ public class InitialRoutesTest {
     private VehicleRoute initialRoute;
 
     @Before
-    public void before(){
+    public void before() {
         VehicleRoutingProblem.Builder builder = VehicleRoutingProblem.Builder.newInstance();
-        VehicleImpl v = VehicleImpl.Builder.newInstance("veh1").setStartLocation(Location.newInstance(0,0)).setLatestArrival(48600).build();
-        Service s1 = Service.Builder.newInstance("s1").setLocation(Location.newInstance(1000,0)).build();
-        Service s2 = Service.Builder.newInstance("s2").setLocation(Location.newInstance(1000,1000)).build();
+        VehicleImpl v = VehicleImpl.Builder.newInstance("veh1").setStartLocation(Location.newInstance(0, 0)).setLatestArrival(48600).build();
+        Service s1 = Service.Builder.newInstance("s1").setLocation(Location.newInstance(1000, 0)).build();
+        Service s2 = Service.Builder.newInstance("s2").setLocation(Location.newInstance(1000, 1000)).build();
         builder.addVehicle(v).addJob(s1).addJob(s2);
         initialRoute = VehicleRoute.Builder.newInstance(v).addService(s1).build();
         builder.addInitialVehicleRoute(initialRoute);

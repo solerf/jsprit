@@ -26,7 +26,7 @@ import java.util.Collection;
 
 public class RouteActivityVisitor implements RouteVisitor {
 
-    private Collection<ActivityVisitor> visitors = new ArrayList<ActivityVisitor>();
+    private final Collection<ActivityVisitor> visitors = new ArrayList<ActivityVisitor>();
 
     @Override
     public void visit(VehicleRoute route) {

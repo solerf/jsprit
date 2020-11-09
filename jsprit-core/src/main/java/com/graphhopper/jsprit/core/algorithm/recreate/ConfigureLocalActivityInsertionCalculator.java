@@ -31,9 +31,9 @@ import java.util.Collection;
  */
 public class ConfigureLocalActivityInsertionCalculator implements InsertionStartsListener, JobInsertedListener {
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
-    private LocalActivityInsertionCostsCalculator localActivityInsertionCostsCalculator;
+    private final LocalActivityInsertionCostsCalculator localActivityInsertionCostsCalculator;
 
     private int nuOfJobsToRecreate;
 

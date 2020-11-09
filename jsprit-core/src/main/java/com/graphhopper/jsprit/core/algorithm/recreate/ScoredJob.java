@@ -41,15 +41,15 @@ class ScoredJob {
         }
     }
 
-    private Job job;
+    private final Job job;
 
-    private double score;
+    private final double score;
 
-    private InsertionData insertionData;
+    private final InsertionData insertionData;
 
-    private VehicleRoute route;
+    private final VehicleRoute route;
 
-    private boolean newRoute;
+    private final boolean newRoute;
 
 
     ScoredJob(Job job, double score, InsertionData insertionData, VehicleRoute route, boolean isNewRoute) {

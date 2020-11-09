@@ -69,9 +69,9 @@ public abstract class AbstractInsertionStrategy implements InsertionStrategy {
 
     protected final static Driver NO_NEW_DRIVER_YET = null;
 
-    private InsertionListeners insertionsListeners;
+    private final InsertionListeners insertionsListeners;
 
-    private EventListeners eventListeners;
+    private final EventListeners eventListeners;
 
     protected VehicleRoutingProblem vrp;
 

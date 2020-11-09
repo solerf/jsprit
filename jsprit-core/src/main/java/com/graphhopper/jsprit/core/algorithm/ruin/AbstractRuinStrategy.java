@@ -35,7 +35,7 @@ public abstract class AbstractRuinStrategy implements RuinStrategy {
 
     private final static Logger logger = LoggerFactory.getLogger(AbstractRuinStrategy.class);
 
-    private RuinListeners ruinListeners;
+    private final RuinListeners ruinListeners;
 
     protected Random random = RandomNumberGeneration.getRandom();
 

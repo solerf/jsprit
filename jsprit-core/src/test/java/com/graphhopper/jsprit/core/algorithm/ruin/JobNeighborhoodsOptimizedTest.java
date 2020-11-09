@@ -24,7 +24,6 @@ import com.graphhopper.jsprit.core.problem.VehicleRoutingProblem;
 import com.graphhopper.jsprit.core.problem.job.Break;
 import com.graphhopper.jsprit.core.problem.job.Job;
 import com.graphhopper.jsprit.core.problem.job.Service;
-
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,7 +62,7 @@ public class JobNeighborhoodsOptimizedTest {
         s5 = Service.Builder.newInstance("s5").addSizeDimension(0, 1).setLocation(Location.newInstance(0, 6)).build();
         s6 = Service.Builder.newInstance("s6").addSizeDimension(0, 1).setLocation(Location.newInstance(0, 7)).build();
         s7 = Service.Builder.newInstance("s7").addSizeDimension(0, 1).setLocation(Location.newInstance(0, 8)).build();
-        
+
         b1 = Break.Builder.newInstance("b1").build();
 
         vrp = builder.addJob(target).addJob(s2).addJob(s3).addJob(s4).addJob(s5).addJob(s6).addJob(s7).build();
@@ -73,7 +72,7 @@ public class JobNeighborhoodsOptimizedTest {
 
     @Test
     public void whenRequestingNeighborhoodOfTargetJob_nNeighborsShouldBeTwo() {
-        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp,jobDistance,2);
+        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp, jobDistance, 2);
         jn.initialise();
         Iterator<Job> iter = jn.getNearestNeighborsIterator(2, target);
         List<Service> services = new ArrayList<Service>();
@@ -85,7 +84,7 @@ public class JobNeighborhoodsOptimizedTest {
 
     @Test
     public void whenRequestingNeighborhoodOfTargetJob_s2ShouldBeNeighbor() {
-        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp,jobDistance,2);
+        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp, jobDistance, 2);
         jn.initialise();
         Iterator<Job> iter = jn.getNearestNeighborsIterator(2, target);
         List<Service> services = new ArrayList<Service>();
@@ -97,7 +96,7 @@ public class JobNeighborhoodsOptimizedTest {
 
     @Test
     public void whenRequestingNeighborhoodOfTargetJob_s4ShouldBeNeighbor() {
-        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp,jobDistance,2);
+        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp, jobDistance, 2);
         jn.initialise();
         Iterator<Job> iter = jn.getNearestNeighborsIterator(2, target);
         List<Service> services = new ArrayList<Service>();
@@ -109,7 +108,7 @@ public class JobNeighborhoodsOptimizedTest {
 
     @Test
     public void whenRequestingNeighborhoodOfTargetJob_sizeShouldBe4() {
-        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp,jobDistance,4);
+        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp, jobDistance, 4);
         jn.initialise();
         Iterator<Job> iter = jn.getNearestNeighborsIterator(4, target);
         List<Service> services = new ArrayList<Service>();
@@ -121,22 +120,22 @@ public class JobNeighborhoodsOptimizedTest {
 
     @Test
     public void whenRequestingNeighborhoodOfTargetJob_neighborsShouldBeCorrect() {
-        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp,jobDistance,4);
+        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp, jobDistance, 4);
         jn.initialise();
         Iterator<Job> iter = jn.getNearestNeighborsIterator(4, s7);
         List<Service> services = new ArrayList<Service>();
         while (iter.hasNext()) {
             services.add((Service) iter.next());
         }
-        Assert.assertEquals(s6,services.get(0));
-        Assert.assertEquals(s5,services.get(1));
-        Assert.assertEquals(target,services.get(2));
-        Assert.assertEquals(s2,services.get(3));
+        Assert.assertEquals(s6, services.get(0));
+        Assert.assertEquals(s5, services.get(1));
+        Assert.assertEquals(target, services.get(2));
+        Assert.assertEquals(s2, services.get(3));
     }
 
     @Test
     public void whenRequestingMoreNeighborsThanExisting_itShouldReturnMaxNeighbors() {
-        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp,jobDistance,2);
+        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp, jobDistance, 2);
         jn.initialise();
         Iterator<Job> iter = jn.getNearestNeighborsIterator(100, target);
         List<Service> services = new ArrayList<Service>();
@@ -148,7 +147,7 @@ public class JobNeighborhoodsOptimizedTest {
 
     @Test
     public void whenRequestingNeighborsForZeroIndexBreak_itShouldReturnEmptyIterator() {
-        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp,jobDistance,2);
+        JobNeighborhoodsOptimized jn = new JobNeighborhoodsOptimized(vrp, jobDistance, 2);
         jn.initialise();
         Iterator<Job> iter = jn.getNearestNeighborsIterator(100, b1);
         List<Service> services = new ArrayList<Service>();

@@ -61,9 +61,7 @@ public class VehicleTypeKey extends AbstractVehicle.AbstractTypeKey {
         if (!endLocationId.equals(that.endLocationId)) return false;
         if (!skills.equals(that.skills)) return false;
         if (!startLocationId.equals(that.startLocationId)) return false;
-        if (!type.equals(that.type)) return false;
-
-        return true;
+        return type.equals(that.type);
     }
 
     @Override
@@ -85,7 +83,7 @@ public class VehicleTypeKey extends AbstractVehicle.AbstractTypeKey {
     @Override
     public String toString() {
         return type + "_" + startLocationId + "_" + endLocationId +
-            "_" + Double.toString(earliestStart) + "_" + Double.toString(latestEnd);
+            "_" + earliestStart + "_" + latestEnd;
     }
 
 

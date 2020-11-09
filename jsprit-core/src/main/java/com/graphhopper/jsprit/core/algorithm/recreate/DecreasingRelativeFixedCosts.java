@@ -34,7 +34,7 @@ public final class DecreasingRelativeFixedCosts extends SolutionCompletenessRati
 
     private double weightDeltaFixCost = 0.5;
 
-    private RouteAndActivityStateGetter stateGetter;
+    private final RouteAndActivityStateGetter stateGetter;
 
     public DecreasingRelativeFixedCosts(RouteAndActivityStateGetter stateGetter, int noJobs) {
         super(noJobs);

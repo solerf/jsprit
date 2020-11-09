@@ -35,9 +35,9 @@ import com.graphhopper.jsprit.core.problem.solution.route.state.RouteAndActivity
  */
 public class ServiceLoadRouteLevelConstraint implements HardRouteConstraint {
 
-    private RouteAndActivityStateGetter stateManager;
+    private final RouteAndActivityStateGetter stateManager;
 
-    private Capacity defaultValue;
+    private final Capacity defaultValue;
 
     public ServiceLoadRouteLevelConstraint(RouteAndActivityStateGetter stateManager) {
         super();
@@ -56,15 +56,11 @@ public class ServiceLoadRouteLevelConstraint implements HardRouteConstraint {
         if (insertionContext.getJob() instanceof Delivery) {
             Capacity loadAtDepot = stateManager.getRouteState(insertionContext.getRoute(), InternalStates.LOAD_AT_BEGINNING, Capacity.class);
             if (loadAtDepot == null) loadAtDepot = defaultValue;
-            if (!Capacity.addup(loadAtDepot, insertionContext.getJob().getSize()).isLessOrEqual(capacityDimensions)) {
-                return false;
-            }
+            return Capacity.addup(loadAtDepot, insertionContext.getJob().getSize()).isLessOrEqual(capacityDimensions);
         } else if (insertionContext.getJob() instanceof Pickup || insertionContext.getJob() instanceof Service) {
             Capacity loadAtEnd = stateManager.getRouteState(insertionContext.getRoute(), InternalStates.LOAD_AT_END, Capacity.class);
             if (loadAtEnd == null) loadAtEnd = defaultValue;
-            if (!Capacity.addup(loadAtEnd, insertionContext.getJob().getSize()).isLessOrEqual(capacityDimensions)) {
-                return false;
-            }
+            return Capacity.addup(loadAtEnd, insertionContext.getJob().getSize()).isLessOrEqual(capacityDimensions);
         }
         return true;
     }

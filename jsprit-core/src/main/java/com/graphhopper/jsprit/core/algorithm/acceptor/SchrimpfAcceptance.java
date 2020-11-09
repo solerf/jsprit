@@ -68,7 +68,7 @@ import java.util.List;
  */
 public class SchrimpfAcceptance implements SolutionAcceptor, IterationStartsListener, AlgorithmStartsListener {
 
-    private static Logger logger = LoggerFactory.getLogger(SchrimpfAcceptance.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(SchrimpfAcceptance.class.getName());
 
     private final double alpha;
 
@@ -170,8 +170,6 @@ public class SchrimpfAcceptance implements SolutionAcceptor, IterationStartsList
     public void incIteration() {
         currentIteration++;
     }
-
-    ;
 
     @Override
     public void informAlgorithmStarts(VehicleRoutingProblem problem, VehicleRoutingAlgorithm algorithm, Collection<VehicleRoutingProblemSolution> solutions) {

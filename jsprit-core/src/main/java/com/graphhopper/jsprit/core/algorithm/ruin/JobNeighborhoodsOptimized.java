@@ -50,10 +50,7 @@ class JobNeighborhoodsOptimized implements JobNeighborhoods {
 
         @Override
         public boolean hasNext() {
-            if(index < noItems && index < itemArray.length) {
-                return true;
-            }
-            return false;
+            return index < noItems && index < itemArray.length;
         }
 
         @Override
@@ -69,17 +66,17 @@ class JobNeighborhoodsOptimized implements JobNeighborhoods {
         }
     }
 
-    private static Logger logger = LoggerFactory.getLogger(JobNeighborhoodsOptimized.class);
+    private static final Logger logger = LoggerFactory.getLogger(JobNeighborhoodsOptimized.class);
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
-    private int[][] neighbors;
+    private final int[][] neighbors;
 
-    private Job[] jobs;
+    private final Job[] jobs;
 
-    private JobDistance jobDistance;
+    private final JobDistance jobDistance;
 
-    private int capacity;
+    private final int capacity;
 
     private double maxDistance = 0.;
 
@@ -88,8 +85,8 @@ class JobNeighborhoodsOptimized implements JobNeighborhoods {
         this.vrp = vrp;
         this.jobDistance = jobDistance;
         this.capacity = capacity;
-        neighbors = new int[vrp.getJobsInclusiveInitialJobsInRoutes().size()+1][capacity];
-        jobs = new Job[vrp.getJobsInclusiveInitialJobsInRoutes().size()+1];
+        neighbors = new int[vrp.getJobsInclusiveInitialJobsInRoutes().size() + 1][capacity];
+        jobs = new Job[vrp.getJobsInclusiveInitialJobsInRoutes().size() + 1];
         logger.debug("initialize {}", this);
     }
 
@@ -98,9 +95,9 @@ class JobNeighborhoodsOptimized implements JobNeighborhoods {
         if (neighborTo.getIndex() == 0) {
             return Collections.emptyIterator();
         }
-        
-        int[] neighbors = this.neighbors[neighborTo.getIndex()-1];
-        return new ArrayIterator(nNeighbors,neighbors,jobs);
+
+        int[] neighbors = this.neighbors[neighborTo.getIndex() - 1];
+        return new ArrayIterator(nNeighbors, neighbors, jobs);
     }
 
     @Override
@@ -129,27 +126,26 @@ class JobNeighborhoodsOptimized implements JobNeighborhoods {
                 ReferencedJob referencedJob = new ReferencedJob(job_j, distance);
                 jobList.add(referencedJob);
             }
-            Collections.sort(jobList,getComparator());
+            Collections.sort(jobList, getComparator());
             int[] jobIndices = new int[capacity];
-            for(int index=0;index<capacity;index++){
+            for (int index = 0; index < capacity; index++) {
                 jobIndices[index] = jobList.get(index).getJob().getIndex();
             }
-            neighbors[job_i.getIndex()-1] = jobIndices;
+            neighbors[job_i.getIndex() - 1] = jobIndices;
         }
         stopWatch.stop();
         logger.debug("pre-processing comp-time: {}", stopWatch);
     }
 
-    private Comparator<ReferencedJob> getComparator(){
+    private Comparator<ReferencedJob> getComparator() {
         return new Comparator<ReferencedJob>() {
             @Override
             public int compare(ReferencedJob o1, ReferencedJob o2) {
                 if (o1.getDistance() < o2.getDistance()) {
                     return -1;
-                } else if (o1.getDistance() > o2.getDistance()){
+                } else if (o1.getDistance() > o2.getDistance()) {
                     return 1;
-                }
-                else return 0;
+                } else return 0;
             }
         };
     }

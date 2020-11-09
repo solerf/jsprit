@@ -159,7 +159,7 @@ public final class Location implements HasIndex, HasId {
 
     private final String name;
 
-    private Object userData;
+    private final Object userData;
 
     private Location(Builder builder) {
         this.userData = builder.userData;

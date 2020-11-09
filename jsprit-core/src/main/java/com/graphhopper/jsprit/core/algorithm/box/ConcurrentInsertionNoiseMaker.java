@@ -25,7 +25,6 @@ import com.graphhopper.jsprit.core.problem.misc.JobInsertionContext;
 import com.graphhopper.jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import com.graphhopper.jsprit.core.problem.solution.route.activity.TourActivity;
 import com.graphhopper.jsprit.core.util.ActivityNoiseMaker;
-import com.graphhopper.jsprit.core.util.NoiseMaker;
 import com.graphhopper.jsprit.core.util.RandomNumberGeneration;
 
 import java.util.Collection;
@@ -44,9 +43,9 @@ class ConcurrentInsertionNoiseMaker implements SoftActivityConstraint, Iteration
 
     private Random random = RandomNumberGeneration.newInstance();
 
-    private Random[] randomArray;
+    private final Random[] randomArray;
 
-    private double maxCosts;
+    private final double maxCosts;
 
     ConcurrentInsertionNoiseMaker(VehicleRoutingProblem vrp, double maxCosts, double noiseLevel, double noiseProbability) {
         this.noiseLevel = noiseLevel;
@@ -62,9 +61,7 @@ class ConcurrentInsertionNoiseMaker implements SoftActivityConstraint, Iteration
 
     @Override
     public void informIterationStarts(int i, VehicleRoutingProblem problem, Collection<VehicleRoutingProblemSolution> solutions) {
-        if (random.nextDouble() < noiseProbability) {
-            makeNoise = true;
-        } else makeNoise = false;
+        makeNoise = random.nextDouble() < noiseProbability;
     }
 
     @Override

@@ -44,7 +44,7 @@ public class PrettyAlgorithmBuilder {
 
     private final ConstraintManager constraintManager;
 
-    private SearchStrategyManager searchStrategyManager;
+    private final SearchStrategyManager searchStrategyManager;
 
     private InsertionStrategy iniInsertionStrategy;
 
@@ -84,7 +84,7 @@ public class PrettyAlgorithmBuilder {
 
     public VehicleRoutingAlgorithm build() {
         if (coreStuff) {
-            AlgorithmUtil.addCoreConstraints(constraintManager,stateManager,vrp);
+            AlgorithmUtil.addCoreConstraints(constraintManager, stateManager, vrp);
         }
         VehicleRoutingAlgorithm vra = new VehicleRoutingAlgorithm(vrp, searchStrategyManager, objectiveFunction);
         vra.addListener(stateManager);

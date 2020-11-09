@@ -23,10 +23,10 @@ import com.graphhopper.jsprit.core.problem.solution.route.activity.TourActivity;
 
 public interface ActivityInsertionCostsCalculator {
 
-    public class ActivityInsertionCosts {
+    class ActivityInsertionCosts {
 
-        private double additionalCosts;
-        private double additionalTime;
+        private final double additionalCosts;
+        private final double additionalTime;
 
         public ActivityInsertionCosts(double additionalCosts, double additionalTime) {
             super();
@@ -51,6 +51,6 @@ public interface ActivityInsertionCostsCalculator {
 
     }
 
-    public double getCosts(JobInsertionContext iContext, TourActivity prevAct, TourActivity nextAct, TourActivity newAct, double depTimeAtPrevAct);
+    double getCosts(JobInsertionContext iContext, TourActivity prevAct, TourActivity nextAct, TourActivity newAct, double depTimeAtPrevAct);
 
 }

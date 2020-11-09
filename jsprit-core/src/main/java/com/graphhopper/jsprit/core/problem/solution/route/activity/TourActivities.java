@@ -35,7 +35,7 @@ public class TourActivities {
 
     public static class ReverseActivityIterator implements Iterator<TourActivity> {
 
-        private List<TourActivity> acts;
+        private final List<TourActivity> acts;
         private int currentIndex;
 
         public ReverseActivityIterator(List<TourActivity> acts) {
@@ -167,7 +167,6 @@ public class TourActivities {
     }
 
 
-
     /**
      * Removes activity from this activity sequence. Removes its corresponding job as well, if there are no other activities
      * related to this job.
@@ -225,13 +224,13 @@ public class TourActivities {
 
         assert insertionIndex >= 0 : "insertionIndex < 0, this cannot be";
 
-		/*
+        /*
          * if 1 --> between start and act(0) --> act(0)
-		 * if 2 && 2 <= acts.size --> between act(0) and act(1) --> act(1)
-		 * if 2 && 2 > acts.size --> at actEnd
-		 * ...
-		 *
-		 */
+         * if 2 && 2 <= acts.size --> between act(0) and act(1) --> act(1)
+         * if 2 && 2 > acts.size --> at actEnd
+         * ...
+         *
+         */
         if (insertionIndex < tourActivities.size()) {
             tourActivities.add(insertionIndex, act);
         } else if (insertionIndex >= tourActivities.size()) {

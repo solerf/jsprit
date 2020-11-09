@@ -66,7 +66,7 @@ public class VehicleRoute {
      */
     public static class Builder {
 
-        private Map<Shipment, TourActivity> openActivities = new HashMap<Shipment, TourActivity>();
+        private final Map<Shipment, TourActivity> openActivities = new HashMap<Shipment, TourActivity>();
 
         /**
          * Returns new instance of this builder.
@@ -107,23 +107,23 @@ public class VehicleRoute {
             return new Builder(vehicle, DriverImpl.noDriver());
         }
 
-        private Vehicle vehicle;
+        private final Vehicle vehicle;
 
-        private Driver driver;
+        private final Driver driver;
 
-        private Start start;
+        private final Start start;
 
-        private End end;
+        private final End end;
 
         private final TourActivities tourActivities = new TourActivities();
 
         private final Set<Shipment> openShipments = new HashSet<Shipment>();
 
         private JobActivityFactory jobActivityFactory = new JobActivityFactory() {
-            
+
             private final TourShipmentActivityFactory shipmentActivityFactory = new DefaultShipmentActivityFactory();
-            
-            private final  TourActivityFactory serviceActivityFactory = new DefaultTourActivityFactory();
+
+            private final TourActivityFactory serviceActivityFactory = new DefaultTourActivityFactory();
 
             @Override
             public List<AbstractActivity> createActivities(Job job) {
@@ -184,7 +184,7 @@ public class VehicleRoute {
          * @throws IllegalArgumentException if service is null
          */
         public Builder addService(Service service) {
-            return addService(service,service.getTimeWindow());
+            return addService(service, service.getTimeWindow());
         }
 
         public Builder addService(Service service, TimeWindow timeWindow) {
@@ -206,7 +206,7 @@ public class VehicleRoute {
         @Deprecated
         public Builder addBreak(Break currentbreak, TimeWindow timeWindow) {
             if (currentbreak == null) throw new IllegalArgumentException("break must not be null");
-            return addService(currentbreak,timeWindow);
+            return addService(currentbreak, timeWindow);
         }
 
         public Builder addBreak(Break currentbreak, TimeWindow timeWindow, Location location) {
@@ -237,7 +237,7 @@ public class VehicleRoute {
 
         public Builder addPickup(Pickup pickup, TimeWindow timeWindow) {
             if (pickup == null) throw new IllegalArgumentException("pickup must not be null");
-            return addService(pickup,timeWindow);
+            return addService(pickup, timeWindow);
         }
 
         /**
@@ -253,7 +253,7 @@ public class VehicleRoute {
 
         public Builder addDelivery(Delivery delivery, TimeWindow timeWindow) {
             if (delivery == null) throw new IllegalArgumentException("delivery must not be null");
-            return addService(delivery,timeWindow);
+            return addService(delivery, timeWindow);
         }
 
         /**
@@ -288,7 +288,7 @@ public class VehicleRoute {
          * @throws IllegalArgumentException if specified shipment has not been picked up yet (i.e. method addPickup(shipment) has not been called yet).
          */
         public Builder addDelivery(Shipment shipment) {
-            return addDelivery(shipment,shipment.getDeliveryTimeWindow());
+            return addDelivery(shipment, shipment.getDeliveryTimeWindow());
         }
 
         public Builder addDelivery(Shipment shipment, TimeWindow deliveryTimeWindow) {
@@ -325,11 +325,11 @@ public class VehicleRoute {
 
     }
 
-    private TourActivities tourActivities;
+    private final TourActivities tourActivities;
 
     private Vehicle vehicle;
 
-    private Driver driver;
+    private final Driver driver;
 
     private Start start;
 

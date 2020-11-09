@@ -155,7 +155,7 @@ public class SolutionPrinter {
         int routeNu = 1;
 
         List<VehicleRoute> list = new ArrayList<VehicleRoute>(solution.getRoutes());
-        Collections.sort(list , new com.graphhopper.jsprit.core.util.VehicleIndexComparator());
+        Collections.sort(list, new com.graphhopper.jsprit.core.util.VehicleIndexComparator());
         for (VehicleRoute route : list) {
             out.format("+---------+----------------------+-----------------------+-----------------+-----------------+-----------------+-----------------+%n");
             double costs = 0;

@@ -44,7 +44,7 @@ import java.io.InputStreamReader;
  */
 public class ChristofidesReader {
 
-    private static Logger logger = LoggerFactory.getLogger(ChristofidesReader.class);
+    private static final Logger logger = LoggerFactory.getLogger(ChristofidesReader.class);
 
     private final VehicleRoutingProblem.Builder vrpBuilder;
 
@@ -95,15 +95,13 @@ public class ChristofidesReader {
                 Coordinate customerCoord = makeCoord(tokens[0].trim(), tokens[1].trim());
                 int demand = Integer.parseInt(tokens[2].trim());
                 String customer = Integer.valueOf(counter - 1).toString();
-                if(jobType.equals(JobType.SERVICE)) {
+                if (jobType.equals(JobType.SERVICE)) {
                     Service service = Service.Builder.newInstance(customer).addSizeDimension(0, demand).setServiceTime(serviceTime).setLocation(Location.newInstance(customerCoord.getX(), customerCoord.getY())).build();
                     vrpBuilder.addJob(service);
-                }
-                else if(jobType.equals(JobType.DELIVERY)){
+                } else if (jobType.equals(JobType.DELIVERY)) {
                     Delivery service = Delivery.Builder.newInstance(customer).addSizeDimension(0, demand).setServiceTime(serviceTime).setLocation(Location.newInstance(customerCoord.getX(), customerCoord.getY())).build();
                     vrpBuilder.addJob(service);
-                }
-                else if(jobType.equals(JobType.PICKUP)){
+                } else if (jobType.equals(JobType.PICKUP)) {
                     Pickup service = Pickup.Builder.newInstance(customer).addSizeDimension(0, demand).setServiceTime(serviceTime).setLocation(Location.newInstance(customerCoord.getX(), customerCoord.getY())).build();
                     vrpBuilder.addJob(service);
                 }

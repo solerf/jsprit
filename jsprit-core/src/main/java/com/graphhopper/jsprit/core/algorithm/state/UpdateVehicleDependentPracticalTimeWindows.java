@@ -42,9 +42,9 @@ public class UpdateVehicleDependentPracticalTimeWindows implements RouteVisitor,
         finish();
     }
 
-    public static interface VehiclesToUpdate {
+    public interface VehiclesToUpdate {
 
-        public Collection<Vehicle> get(VehicleRoute route);
+        Collection<Vehicle> get(VehicleRoute route);
 
     }
 
@@ -65,9 +65,9 @@ public class UpdateVehicleDependentPracticalTimeWindows implements RouteVisitor,
 
     private VehicleRoute route;
 
-    private double[] latest_arrTimes_at_prevAct;
+    private final double[] latest_arrTimes_at_prevAct;
 
-    private Location[] location_of_prevAct;
+    private final Location[] location_of_prevAct;
 
     private Collection<Vehicle> vehicles;
 
@@ -91,7 +91,7 @@ public class UpdateVehicleDependentPracticalTimeWindows implements RouteVisitor,
         for (Vehicle vehicle : vehicles) {
             latest_arrTimes_at_prevAct[vehicle.getVehicleTypeIdentifier().getIndex()] = vehicle.getLatestArrival();
             Location location = vehicle.getEndLocation();
-            if(!vehicle.isReturnToDepot()){
+            if (!vehicle.isReturnToDepot()) {
                 location = route.getEnd().getLocation();
             }
             location_of_prevAct[vehicle.getVehicleTypeIdentifier().getIndex()] = location;

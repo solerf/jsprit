@@ -39,9 +39,9 @@ import java.util.*;
 
 public final class RuinWorst extends AbstractRuinStrategy {
 
-    private Logger logger = LoggerFactory.getLogger(RuinWorst.class);
+    private final Logger logger = LoggerFactory.getLogger(RuinWorst.class);
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
     private NoiseMaker noiseMaker = new NoiseMaker() {
 

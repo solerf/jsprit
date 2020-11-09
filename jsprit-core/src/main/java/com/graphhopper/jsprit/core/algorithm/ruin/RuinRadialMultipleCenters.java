@@ -37,11 +37,11 @@ import java.util.*;
 @Deprecated
 public final class RuinRadialMultipleCenters extends AbstractRuinStrategy {
 
-    private Logger logger = LoggerFactory.getLogger(RuinRadialMultipleCenters.class);
+    private final Logger logger = LoggerFactory.getLogger(RuinRadialMultipleCenters.class);
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
-    private JobNeighborhoods jobNeighborhoods;
+    private final JobNeighborhoods jobNeighborhoods;
 
     private final int noJobsToMemorize;
 

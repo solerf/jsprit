@@ -114,7 +114,7 @@ final class ServiceInsertionCalculator extends AbstractInsertionCalculator {
 
         double bestCost = bestKnownCosts;
         additionalICostsAtRouteLevel += additionalAccessEgressCalculator.getCosts(insertionContext);
-		TimeWindow bestTimeWindow = null;
+        TimeWindow bestTimeWindow = null;
 
         /*
         generate new start and end for new vehicle
@@ -128,15 +128,15 @@ final class ServiceInsertionCalculator extends AbstractInsertionCalculator {
         int actIndex = 0;
         Iterator<TourActivity> activityIterator = currentRoute.getActivities().iterator();
         boolean tourEnd = false;
-        while(!tourEnd){
+        while (!tourEnd) {
             TourActivity nextAct;
-            if(activityIterator.hasNext()) nextAct = activityIterator.next();
-            else{
+            if (activityIterator.hasNext()) nextAct = activityIterator.next();
+            else {
                 nextAct = end;
                 tourEnd = true;
             }
             boolean not_fulfilled_break = true;
-			for(TimeWindow timeWindow : service.getTimeWindows()) {
+            for (TimeWindow timeWindow : service.getTimeWindows()) {
                 deliveryAct2Insert.setTheoreticalEarliestOperationStartTime(timeWindow.getStart());
                 deliveryAct2Insert.setTheoreticalLatestOperationStartTime(timeWindow.getEnd());
                 ActivityContext activityContext = new ActivityContext();
@@ -155,14 +155,14 @@ final class ServiceInsertionCalculator extends AbstractInsertionCalculator {
                 } else if (status.equals(ConstraintsStatus.NOT_FULFILLED)) {
                     not_fulfilled_break = false;
                 }
-			}
-            if(not_fulfilled_break) break;
+            }
+            if (not_fulfilled_break) break;
             double nextActArrTime = prevActStartTime + transportCosts.getTransportTime(prevAct.getLocation(), nextAct.getLocation(), prevActStartTime, newDriver, newVehicle);
-            prevActStartTime = Math.max(nextActArrTime, nextAct.getTheoreticalEarliestOperationStartTime()) + activityCosts.getActivityDuration(nextAct,nextActArrTime,newDriver,newVehicle);
+            prevActStartTime = Math.max(nextActArrTime, nextAct.getTheoreticalEarliestOperationStartTime()) + activityCosts.getActivityDuration(nextAct, nextActArrTime, newDriver, newVehicle);
             prevAct = nextAct;
             actIndex++;
         }
-        if(insertionIndex == InsertionData.NO_INDEX) {
+        if (insertionIndex == InsertionData.NO_INDEX) {
             InsertionData emptyInsertionData = new InsertionData.NoInsertionFound();
             for (HardConstraint c : failedActivityConstraints) {
                 emptyInsertionData.addFailedConstrainName(c.getClass().getSimpleName());
@@ -173,7 +173,7 @@ final class ServiceInsertionCalculator extends AbstractInsertionCalculator {
         deliveryAct2Insert.setTheoreticalEarliestOperationStartTime(bestTimeWindow.getStart());
         deliveryAct2Insert.setTheoreticalLatestOperationStartTime(bestTimeWindow.getEnd());
         insertionData.getEvents().add(new InsertActivity(currentRoute, newVehicle, deliveryAct2Insert, insertionIndex));
-        insertionData.getEvents().add(new SwitchVehicle(currentRoute,newVehicle,newVehicleDepartureTime));
+        insertionData.getEvents().add(new SwitchVehicle(currentRoute, newVehicle, newVehicleDepartureTime));
         insertionData.setVehicleDepartureTime(newVehicleDepartureTime);
         return insertionData;
     }

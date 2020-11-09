@@ -40,7 +40,7 @@ public final class InsertionInitialSolutionFactory implements InitialSolutionFac
 
     private final InsertionStrategy insertion;
 
-    private SolutionCostCalculator solutionCostsCalculator;
+    private final SolutionCostCalculator solutionCostsCalculator;
 
     public InsertionInitialSolutionFactory(InsertionStrategy insertionStrategy, SolutionCostCalculator solutionCostCalculator) {
         super();

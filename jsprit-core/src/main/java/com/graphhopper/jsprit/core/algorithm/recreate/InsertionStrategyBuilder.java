@@ -38,15 +38,15 @@ public class InsertionStrategyBuilder {
         REGRET, BEST
     }
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
-    private StateManager stateManager;
+    private final StateManager stateManager;
 
     private boolean local = true;
 
-    private ConstraintManager constraintManager;
+    private final ConstraintManager constraintManager;
 
-    private VehicleFleetManager fleetManager;
+    private final VehicleFleetManager fleetManager;
 
     private double weightOfFixedCosts;
 
@@ -66,7 +66,7 @@ public class InsertionStrategyBuilder {
 
     private int nNeighbors;
 
-    private boolean timeScheduling = false;
+    private final boolean timeScheduling = false;
 
     private boolean allowVehicleSwitch = true;
 

@@ -121,7 +121,7 @@ public class TestRouteLevelServiceInsertionCostEstimator {
         when(vrpMock.getFleetSize()).thenReturn(VehicleRoutingProblem.FleetSize.INFINITE);
         stateManager = new StateManager(vrpMock);
         stateManager.addStateUpdater(new UpdateVariableCosts(activityCosts, routingCosts, stateManager));
-        stateManager.informInsertionStarts(Arrays.asList(route), Collections.<Job>emptyList());
+        stateManager.informInsertionStarts(Arrays.asList(route), Collections.emptyList());
         constraintManager = new ConstraintManager(vrp, stateManager);
     }
 

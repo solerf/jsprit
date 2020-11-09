@@ -34,11 +34,11 @@ import com.graphhopper.jsprit.core.util.ActivityTimeTracker;
  */
 public class UpdateVariableCosts implements ActivityVisitor, StateUpdater {
 
-    private VehicleRoutingActivityCosts activityCost;
+    private final VehicleRoutingActivityCosts activityCost;
 
-    private ForwardTransportCost transportCost;
+    private final ForwardTransportCost transportCost;
 
-    private StateManager states;
+    private final StateManager states;
 
     private double totalOperationCost = 0.0;
 
@@ -48,7 +48,7 @@ public class UpdateVariableCosts implements ActivityVisitor, StateUpdater {
 
     private double startTimeAtPrevAct = 0.0;
 
-    private ActivityTimeTracker timeTracker;
+    private final ActivityTimeTracker timeTracker;
 
     /**
      * Updates total costs (i.e. transport and activity costs) at route and activity level.

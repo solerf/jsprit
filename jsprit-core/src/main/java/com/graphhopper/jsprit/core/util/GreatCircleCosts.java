@@ -51,7 +51,7 @@ public class GreatCircleCosts extends AbstractForwardVehicleRoutingTransportCost
 
     private DistanceUnit distanceUnit = DistanceUnit.Kilometer;
 
-   public GreatCircleCosts() {
+    public GreatCircleCosts() {
         super();
     }
 

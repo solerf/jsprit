@@ -37,7 +37,7 @@ class CalculatesServiceInsertionWithTimeScheduling implements JobInsertionCostsC
 
 
     public static class KnowledgeInjection implements InsertionStartsListener {
-        private CalculatesServiceInsertionWithTimeScheduling c;
+        private final CalculatesServiceInsertionWithTimeScheduling c;
 
         public KnowledgeInjection(CalculatesServiceInsertionWithTimeScheduling c) {
             super();
@@ -60,9 +60,9 @@ class CalculatesServiceInsertionWithTimeScheduling implements JobInsertionCostsC
         }
     }
 
-    private static Logger log = LoggerFactory.getLogger(CalculatesServiceInsertionWithTimeScheduling.class);
+    private static final Logger log = LoggerFactory.getLogger(CalculatesServiceInsertionWithTimeScheduling.class);
 
-    private JobInsertionCostsCalculator jic;
+    private final JobInsertionCostsCalculator jic;
 
     private List<Double> departureTimeKnowledge = new ArrayList<Double>();
 

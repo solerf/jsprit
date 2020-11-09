@@ -36,11 +36,11 @@ import java.util.Map;
  */
 public class MaxDistanceConstraint implements HardActivityConstraint {
 
-    private StateManager stateManager;
+    private final StateManager stateManager;
 
-    private StateId distanceId;
+    private final StateId distanceId;
 
-    private TransportDistance distanceCalculator;
+    private final TransportDistance distanceCalculator;
 
     private Double[] maxDistances;
 

@@ -110,10 +110,8 @@ public class TimeWindow {
         TimeWindow other = (TimeWindow) obj;
         if (Double.doubleToLongBits(end) != Double.doubleToLongBits(other.end))
             return false;
-        if (Double.doubleToLongBits(start) != Double
-            .doubleToLongBits(other.start))
-            return false;
-        return true;
+        return Double.doubleToLongBits(start) == Double
+            .doubleToLongBits(other.start);
     }
 
 

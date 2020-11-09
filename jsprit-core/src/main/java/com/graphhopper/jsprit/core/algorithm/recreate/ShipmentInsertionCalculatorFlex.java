@@ -53,19 +53,19 @@ public final class ShipmentInsertionCalculatorFlex extends AbstractInsertionCalc
 //
 //    private HardActivityConstraint hardActivityLevelConstraint;
 
-    private SoftRouteConstraint softRouteConstraint;
+    private final SoftRouteConstraint softRouteConstraint;
 
-    private SoftActivityConstraint softActivityConstraint;
+    private final SoftActivityConstraint softActivityConstraint;
 
-    private ActivityInsertionCostsCalculator activityInsertionCostsCalculator;
+    private final ActivityInsertionCostsCalculator activityInsertionCostsCalculator;
 
-    private VehicleRoutingTransportCosts transportCosts;
+    private final VehicleRoutingTransportCosts transportCosts;
 
-    private VehicleRoutingActivityCosts activityCosts;
+    private final VehicleRoutingActivityCosts activityCosts;
 
     private JobActivityFactory activityFactory;
 
-    private AdditionalAccessEgressCalculator additionalAccessEgressCalculator;
+    private final AdditionalAccessEgressCalculator additionalAccessEgressCalculator;
 
     private int evalIndexPickup = Integer.MAX_VALUE;
     private int evalIndexDelivery = Integer.MAX_VALUE;

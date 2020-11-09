@@ -31,17 +31,17 @@ import java.util.List;
  */
 public class JobInsertionContext {
 
-    private VehicleRoute route;
+    private final VehicleRoute route;
 
-    private Job job;
+    private final Job job;
 
-    private Vehicle newVehicle;
+    private final Vehicle newVehicle;
 
-    private Driver newDriver;
+    private final Driver newDriver;
 
-    private double newDepTime;
+    private final double newDepTime;
 
-    private List<TourActivity> associatedActivities = new ArrayList<>();
+    private final List<TourActivity> associatedActivities = new ArrayList<>();
 
     private ActivityContext activityContext;
 
@@ -134,11 +134,11 @@ public class JobInsertionContext {
         return this.relatedActivityContext;
     }
 
-    public void setActivityContext(ActivityContext activityContext){
+    public void setActivityContext(ActivityContext activityContext) {
         this.activityContext = activityContext;
     }
 
-    public ActivityContext getActivityContext(){
+    public ActivityContext getActivityContext() {
         return this.activityContext;
     }
 }

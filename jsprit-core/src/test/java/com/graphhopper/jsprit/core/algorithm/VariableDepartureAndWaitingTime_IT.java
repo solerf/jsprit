@@ -39,14 +39,13 @@ import com.graphhopper.jsprit.core.util.Solutions;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 /**
  * Created by schroeder on 22/07/15.
  */
 public class VariableDepartureAndWaitingTime_IT {
 
-    static interface AlgorithmFactory {
+    interface AlgorithmFactory {
         VehicleRoutingAlgorithm createAlgorithm(VehicleRoutingProblem vrp);
     }
 

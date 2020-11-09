@@ -34,7 +34,7 @@ import com.graphhopper.jsprit.core.util.EuclideanDistanceCalculator;
  */
 public class AvgServiceAndShipmentDistance implements JobDistance {
 
-    private VehicleRoutingTransportCosts costs;
+    private final VehicleRoutingTransportCosts costs;
 
     public AvgServiceAndShipmentDistance(VehicleRoutingTransportCosts costs) {
         super();

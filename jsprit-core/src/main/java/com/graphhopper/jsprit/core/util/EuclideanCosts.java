@@ -68,6 +68,6 @@ public class EuclideanCosts extends AbstractForwardVehicleRoutingTransportCosts 
 
     @Override
     public double getDistance(Location from, Location to, double departureTime, Vehicle vehicle) {
-            return calculateDistance(from, to);
+        return calculateDistance(from, to);
     }
 }

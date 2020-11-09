@@ -48,7 +48,7 @@ public final class RuinClusters extends AbstractRuinStrategy implements Iteratio
 
     public static class JobActivityWrapper implements Clusterable {
 
-        private TourActivity.JobActivity jobActivity;
+        private final TourActivity.JobActivity jobActivity;
 
         public JobActivityWrapper(TourActivity.JobActivity jobActivity) {
             this.jobActivity = jobActivity;
@@ -64,12 +64,12 @@ public final class RuinClusters extends AbstractRuinStrategy implements Iteratio
         }
     }
 
-    private Logger logger = LoggerFactory.getLogger(RuinClusters.class);
+    private final Logger logger = LoggerFactory.getLogger(RuinClusters.class);
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
 
-    private JobNeighborhoods jobNeighborhoods;
+    private final JobNeighborhoods jobNeighborhoods;
 
     private int noClusters = 2;
 

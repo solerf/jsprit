@@ -30,7 +30,7 @@ public class HardSkillConstraint implements HardRouteConstraint {
 
     private static final Skills defaultSkills = Skills.Builder.newInstance().build();
 
-    private RouteAndActivityStateGetter states;
+    private final RouteAndActivityStateGetter states;
 
     public HardSkillConstraint(RouteAndActivityStateGetter states) {
         this.states = states;

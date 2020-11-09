@@ -56,17 +56,17 @@ public class Shipment extends AbstractJob {
      */
     public static class Builder {
 
-        private String id;
+        private final String id;
 
         private double pickupServiceTime = 0.0;
 
         private double deliveryServiceTime = 0.0;
 
-        private Capacity.Builder capacityBuilder = Capacity.Builder.newInstance();
+        private final Capacity.Builder capacityBuilder = Capacity.Builder.newInstance();
 
         private Capacity capacity;
 
-        private Skills.Builder skillBuilder = Skills.Builder.newInstance();
+        private final Skills.Builder skillBuilder = Skills.Builder.newInstance();
 
         private Skills skills;
 
@@ -121,9 +121,8 @@ public class Shipment extends AbstractJob {
          * but never interacts with it in any way.
          * </p>
          *
-         * @param userData
-         *            any object holding the domain specific user data
-         *            associated with the object.
+         * @param userData any object holding the domain specific user data
+         *                 associated with the object.
          * @return builder
          */
         public Builder setUserData(Object userData) {
@@ -134,8 +133,7 @@ public class Shipment extends AbstractJob {
         /**
          * Sets pickup location.
          *
-         * @param pickupLocation
-         *            pickup location
+         * @param pickupLocation pickup location
          * @return builder
          */
         public Builder setPickupLocation(Location pickupLocation) {
@@ -175,7 +173,6 @@ public class Shipment extends AbstractJob {
             this.pickupTimeWindows.add(timeWindow);
             return this;
         }
-
 
 
         /**
@@ -250,7 +247,7 @@ public class Shipment extends AbstractJob {
          *
          * @return shipment
          * @throws IllegalArgumentException if neither pickup-location nor pickup-coord is set or if neither delivery-location nor delivery-coord
-         *                               is set
+         *                                  is set
          */
         public Shipment build() {
             if (pickupLocation_ == null) throw new IllegalArgumentException("The pickup location is missing.");
@@ -285,7 +282,7 @@ public class Shipment extends AbstractJob {
 
         public Builder addDeliveryTimeWindow(TimeWindow timeWindow) {
             if (timeWindow == null) throw new IllegalArgumentException("The time window must not be null.");
-            if(!deliveryTimeWindowAdded){
+            if (!deliveryTimeWindowAdded) {
                 deliveryTimeWindows = new TimeWindowsImpl();
                 deliveryTimeWindowAdded = true;
             }
@@ -305,7 +302,7 @@ public class Shipment extends AbstractJob {
 
         public Builder addPickupTimeWindow(TimeWindow timeWindow) {
             if (timeWindow == null) throw new IllegalArgumentException("The time window must not be null.");
-            if(!pickupTimeWindowAdded){
+            if (!pickupTimeWindowAdded) {
                 pickupTimeWindows = new TimeWindowsImpl();
                 pickupTimeWindowAdded = true;
             }
@@ -343,7 +340,7 @@ public class Shipment extends AbstractJob {
          * @param maxTimeInVehicle
          * @return
          */
-        public Builder setMaxTimeInVehicle(double maxTimeInVehicle){
+        public Builder setMaxTimeInVehicle(double maxTimeInVehicle) {
             if (maxTimeInVehicle < 0)
                 throw new IllegalArgumentException("The maximum time in vehicle must be positive.");
             this.maxTimeInVehicle = maxTimeInVehicle;
@@ -464,10 +461,10 @@ public class Shipment extends AbstractJob {
     @Override
     public String toString() {
         return "[id=" + id + "][name=" + name + "][pickupLocation=" + pickupLocation_
-                + "][deliveryLocation=" + deliveryLocation_ + "][capacity=" + capacity
-                + "][pickupServiceTime=" + pickupServiceTime + "][deliveryServiceTime="
-                + deliveryServiceTime + "][pickupTimeWindows=" + pickupTimeWindows
-                + "][deliveryTimeWindows=" + deliveryTimeWindows + "]";
+            + "][deliveryLocation=" + deliveryLocation_ + "][capacity=" + capacity
+            + "][pickupServiceTime=" + pickupServiceTime + "][deliveryServiceTime="
+            + deliveryServiceTime + "][pickupTimeWindows=" + pickupTimeWindows
+            + "][deliveryTimeWindows=" + deliveryTimeWindows + "]";
     }
 
 
@@ -494,11 +491,8 @@ public class Shipment extends AbstractJob {
             return false;
         Shipment other = (Shipment) obj;
         if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+            return other.id == null;
+        } else return id.equals(other.id);
     }
 
     @Override

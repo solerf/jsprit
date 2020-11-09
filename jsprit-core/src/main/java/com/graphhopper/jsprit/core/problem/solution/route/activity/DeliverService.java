@@ -24,9 +24,9 @@ import com.graphhopper.jsprit.core.problem.job.Delivery;
 
 public final class DeliverService extends AbstractActivity implements DeliveryActivity {
 
-    private Delivery delivery;
+    private final Delivery delivery;
 
-    private Capacity capacity;
+    private final Capacity capacity;
 
     private double arrTime;
 

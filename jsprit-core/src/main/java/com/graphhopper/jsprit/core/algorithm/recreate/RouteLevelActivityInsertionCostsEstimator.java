@@ -34,11 +34,11 @@ import java.util.List;
 @Deprecated
 class RouteLevelActivityInsertionCostsEstimator implements ActivityInsertionCostsCalculator {
 
-    private VehicleRoutingActivityCosts activityCosts;
+    private final VehicleRoutingActivityCosts activityCosts;
 
-    private AuxilliaryCostCalculator auxilliaryPathCostCalculator;
+    private final AuxilliaryCostCalculator auxilliaryPathCostCalculator;
 
-    private RouteAndActivityStateGetter stateManager;
+    private final RouteAndActivityStateGetter stateManager;
 
     private int nuOfActivities2LookForward = 0;
 
@@ -62,9 +62,9 @@ class RouteLevelActivityInsertionCostsEstimator implements ActivityInsertionCost
             path.addAll(getForwardLookingPath(iFacts.getRoute(), actIndex));
         }
 
-		/*
+        /*
          * calculates the path costs with new vehicle, c(forwardPath,newVehicle).
-		 */
+         */
         double forwardPathCost_newVehicle = auxilliaryPathCostCalculator.costOfPath(path, depTimeAtPrevAct, iFacts.getNewDriver(), iFacts.getNewVehicle());
         return forwardPathCost_newVehicle - (actCostsOld(iFacts.getRoute(), path.get(path.size() - 1)) - actCostsOld(iFacts.getRoute(), prevAct));
     }

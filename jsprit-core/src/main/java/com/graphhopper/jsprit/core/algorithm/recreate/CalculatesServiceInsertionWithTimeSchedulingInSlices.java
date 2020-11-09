@@ -31,9 +31,9 @@ import java.util.List;
 class CalculatesServiceInsertionWithTimeSchedulingInSlices implements JobInsertionCostsCalculator {
 
 
-    private static Logger log = LoggerFactory.getLogger(CalculatesServiceInsertionWithTimeSchedulingInSlices.class);
+    private static final Logger log = LoggerFactory.getLogger(CalculatesServiceInsertionWithTimeSchedulingInSlices.class);
 
-    private JobInsertionCostsCalculator jic;
+    private final JobInsertionCostsCalculator jic;
 
     private int nOfDepartureTimes = 3;
 

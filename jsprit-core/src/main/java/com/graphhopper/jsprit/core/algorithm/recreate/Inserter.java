@@ -55,11 +55,11 @@ class Inserter {
 
     class ServiceInsertionHandler implements JobInsertionHandler {
 
-        private TourActivityFactory activityFactory = new DefaultTourActivityFactory();
+        private final TourActivityFactory activityFactory = new DefaultTourActivityFactory();
 
         private JobInsertionHandler delegator = new JobExceptionHandler();
 
-        private VehicleRoutingProblem vehicleRoutingProblem;
+        private final VehicleRoutingProblem vehicleRoutingProblem;
 
         public ServiceInsertionHandler(VehicleRoutingProblem vehicleRoutingProblem) {
             this.vehicleRoutingProblem = vehicleRoutingProblem;
@@ -93,7 +93,7 @@ class Inserter {
 
         private final VehicleRoutingProblem vehicleRoutingProblem;
 
-        private TourShipmentActivityFactory activityFactory = new DefaultShipmentActivityFactory();
+        private final TourShipmentActivityFactory activityFactory = new DefaultShipmentActivityFactory();
 
         private JobInsertionHandler delegator = new JobExceptionHandler();
 
@@ -128,9 +128,9 @@ class Inserter {
 
     }
 
-    private InsertionListeners insertionListeners;
+    private final InsertionListeners insertionListeners;
 
-    private JobInsertionHandler jobInsertionHandler;
+    private final JobInsertionHandler jobInsertionHandler;
 
     private VehicleRoutingProblem vehicleRoutingProblem;
 

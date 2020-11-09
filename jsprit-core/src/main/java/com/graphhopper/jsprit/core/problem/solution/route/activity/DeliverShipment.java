@@ -25,13 +25,13 @@ import com.graphhopper.jsprit.core.problem.job.Shipment;
 
 public final class DeliverShipment extends AbstractActivity implements DeliveryActivity {
 
-    private Shipment shipment;
+    private final Shipment shipment;
 
     private double endTime;
 
     private double arrTime;
 
-    private Capacity capacity;
+    private final Capacity capacity;
 
     private double earliest = 0;
 

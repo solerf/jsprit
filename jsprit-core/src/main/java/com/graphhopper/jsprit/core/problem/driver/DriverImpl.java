@@ -31,7 +31,7 @@ public class DriverImpl implements Driver {
 
     }
 
-    private String id;
+    private final String id;
 
     private double earliestStart = 0.0;
 

@@ -46,17 +46,17 @@ import java.util.*;
  */
 public class StateManager implements RouteAndActivityStateGetter, IterationStartsListener, RuinListener, InsertionStartsListener, JobInsertedListener, InsertionEndsListener {
 
-    private RouteActivityVisitor routeActivityVisitor = new RouteActivityVisitor();
+    private final RouteActivityVisitor routeActivityVisitor = new RouteActivityVisitor();
 
-    private ReverseRouteActivityVisitor revRouteActivityVisitor = new ReverseRouteActivityVisitor();
+    private final ReverseRouteActivityVisitor revRouteActivityVisitor = new ReverseRouteActivityVisitor();
 
-    private Collection<RouteVisitor> routeVisitors = new ArrayList<RouteVisitor>();
+    private final Collection<RouteVisitor> routeVisitors = new ArrayList<RouteVisitor>();
 
-    private RuinListeners ruinListeners = new RuinListeners();
+    private final RuinListeners ruinListeners = new RuinListeners();
 
-    private InsertionListeners insertionListeners = new InsertionListeners();
+    private final InsertionListeners insertionListeners = new InsertionListeners();
 
-    private Collection<StateUpdater> updaters = new ArrayList<StateUpdater>();
+    private final Collection<StateUpdater> updaters = new ArrayList<StateUpdater>();
 
     private boolean updateLoad = false;
 
@@ -66,11 +66,11 @@ public class StateManager implements RouteAndActivityStateGetter, IterationStart
 
     private int stateIndexCounter;
 
-    private Map<String, StateId> createdStateIds = new HashMap<String, StateId>();
+    private final Map<String, StateId> createdStateIds = new HashMap<String, StateId>();
 
-    private int nuActivities;
+    private final int nuActivities;
 
-    private int nuVehicleTypeKeys;
+    private final int nuVehicleTypeKeys;
 
     private Object[] problemStates;
 
@@ -78,15 +78,15 @@ public class StateManager implements RouteAndActivityStateGetter, IterationStart
 
     private Object[][][] vehicleDependentActivityStates;
 
-    private Map<VehicleRoute, Object[]> routeStateMap;
+    private final Map<VehicleRoute, Object[]> routeStateMap;
 
-    private Map<VehicleRoute, Object[][]> vehicleDependentRouteStateMap;
+    private final Map<VehicleRoute, Object[][]> vehicleDependentRouteStateMap;
 
     private Object[][] routeStatesArr;
 
     private Object[][][] vehicleDependentRouteStatesArr;
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
     private final boolean isIndexedBased;
 
@@ -109,9 +109,9 @@ public class StateManager implements RouteAndActivityStateGetter, IterationStart
         if (stateIndexCounter >= activityStates[0].length) {
             activityStates = new Object[nuActivities][stateIndexCounter + 1];
             vehicleDependentActivityStates = new Object[nuActivities][nuVehicleTypeKeys][stateIndexCounter + 1];
-            routeStatesArr = new Object[vrp.getVehicles().size() + 2][stateIndexCounter+1];
-            vehicleDependentRouteStatesArr = new Object[vrp.getVehicles().size() + 2][nuVehicleTypeKeys][stateIndexCounter+1];
-            problemStates = new Object[stateIndexCounter+1];
+            routeStatesArr = new Object[vrp.getVehicles().size() + 2][stateIndexCounter + 1];
+            vehicleDependentRouteStatesArr = new Object[vrp.getVehicles().size() + 2][nuVehicleTypeKeys][stateIndexCounter + 1];
+            problemStates = new Object[stateIndexCounter + 1];
         }
         StateId id = StateFactory.createId(name, stateIndexCounter);
         incStateIndexCounter();
@@ -143,9 +143,9 @@ public class StateManager implements RouteAndActivityStateGetter, IterationStart
 //            vehicleDependentRouteStatesArr = new Object[vrp.getVehicles().size() + 2][nuVehicleTypeKeys][initialStateArrayLength];
 //        }
 //        else {
-            isIndexedBased = false;
-            routeStateMap = new HashMap<VehicleRoute, Object[]>();
-            vehicleDependentRouteStateMap = new HashMap<VehicleRoute, Object[][]>();
+        isIndexedBased = false;
+        routeStateMap = new HashMap<VehicleRoute, Object[]>();
+        vehicleDependentRouteStateMap = new HashMap<VehicleRoute, Object[][]>();
 //        }
         problemStates = new Object[initialStateArrayLength];
     }
@@ -191,15 +191,14 @@ public class StateManager implements RouteAndActivityStateGetter, IterationStart
     public void clear() {
         fill_twoDimArr(activityStates, null);
         fill_threeDimArr(vehicleDependentActivityStates, null);
-        if(isIndexedBased) {
+        if (isIndexedBased) {
             fill_twoDimArr(routeStatesArr, null);
             fill_threeDimArr(vehicleDependentRouteStatesArr, null);
-        }
-        else{
+        } else {
             routeStateMap.clear();
             vehicleDependentRouteStateMap.clear();
         }
-        Arrays.fill(problemStates,null);
+        Arrays.fill(problemStates, null);
     }
 
     private void fill_threeDimArr(Object[][][] states, Object o) {
@@ -303,14 +302,13 @@ public class StateManager implements RouteAndActivityStateGetter, IterationStart
     public <T> T getRouteState(VehicleRoute route, StateId stateId, Class<T> type) {
         if (route == null) return null;
         T state = null;
-        if(isIndexedBased){
+        if (isIndexedBased) {
             try {
                 state = type.cast(routeStatesArr[route.getVehicle().getIndex()][stateId.getIndex()]);
             } catch (ClassCastException e) {
-                throw getClassCastException(e,stateId,type.toString(),routeStatesArr[route.getVehicle().getIndex()][stateId.getIndex()].getClass().toString());
+                throw getClassCastException(e, stateId, type.toString(), routeStatesArr[route.getVehicle().getIndex()][stateId.getIndex()].getClass().toString());
             }
-        }
-        else {
+        } else {
             try {
                 if (routeStateMap.containsKey(route)) {
                     state = type.cast(routeStateMap.get(route)[stateId.getIndex()]);
@@ -353,14 +351,13 @@ public class StateManager implements RouteAndActivityStateGetter, IterationStart
     public <T> T getRouteState(VehicleRoute route, Vehicle vehicle, StateId stateId, Class<T> type) {
 //        if (route.isEmpty()) return null;
         T state = null;
-        if(isIndexedBased){
+        if (isIndexedBased) {
             try {
                 state = type.cast(vehicleDependentRouteStatesArr[route.getVehicle().getIndex()][vehicle.getVehicleTypeIdentifier().getIndex()][stateId.getIndex()]);
             } catch (ClassCastException e) {
                 throw getClassCastException(e, stateId, type.toString(), vehicleDependentRouteStatesArr[route.getVehicle().getIndex()][vehicle.getVehicleTypeIdentifier().getIndex()][stateId.getIndex()].getClass().toString());
             }
-        }
-        else {
+        } else {
             try {
                 if (vehicleDependentRouteStateMap.containsKey(route)) {
                     state = type.cast(vehicleDependentRouteStateMap.get(route)[vehicle.getVehicleTypeIdentifier().getIndex()][stateId.getIndex()]);
@@ -459,10 +456,9 @@ public class StateManager implements RouteAndActivityStateGetter, IterationStart
 
     <T> void putTypedInternalRouteState(VehicleRoute route, StateId stateId, T state) {
 //        if (route.isEmpty()) return;
-        if(isIndexedBased){
+        if (isIndexedBased) {
             routeStatesArr[route.getVehicle().getIndex()][stateId.getIndex()] = state;
-        }
-        else {
+        } else {
             if (!routeStateMap.containsKey(route)) {
                 routeStateMap.put(route, new Object[stateIndexCounter]);
             }
@@ -472,10 +468,9 @@ public class StateManager implements RouteAndActivityStateGetter, IterationStart
 
     <T> void putTypedInternalRouteState(VehicleRoute route, Vehicle vehicle, StateId stateId, T state) {
 //        if (route.isEmpty()) return;
-        if(isIndexedBased){
+        if (isIndexedBased) {
             vehicleDependentRouteStatesArr[route.getVehicle().getIndex()][vehicle.getVehicleTypeIdentifier().getIndex()][stateId.getIndex()] = state;
-        }
-        else {
+        } else {
             if (!vehicleDependentRouteStateMap.containsKey(route)) {
                 vehicleDependentRouteStateMap.put(route, new Object[nuVehicleTypeKeys][stateIndexCounter]);
             }
@@ -576,8 +571,8 @@ public class StateManager implements RouteAndActivityStateGetter, IterationStart
         }
     }
 
-    public void reCalculateStates(VehicleRoute route){
-        informInsertionStarts(Arrays.asList(route),Collections.<Job>emptyList());
+    public void reCalculateStates(VehicleRoute route) {
+        informInsertionStarts(Arrays.asList(route), Collections.emptyList());
     }
 
     @Override

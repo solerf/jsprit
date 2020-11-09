@@ -35,7 +35,7 @@ import java.util.Set;
 
 final class VehicleTypeDependentJobInsertionCalculator implements JobInsertionCostsCalculator {
 
-    private Logger logger = LoggerFactory.getLogger(VehicleTypeDependentJobInsertionCalculator.class);
+    private final Logger logger = LoggerFactory.getLogger(VehicleTypeDependentJobInsertionCalculator.class);
 
     private final VehicleFleetManager fleetManager;
 
@@ -43,7 +43,7 @@ final class VehicleTypeDependentJobInsertionCalculator implements JobInsertionCo
 
     private final VehicleRoutingProblem vrp;
 
-    private Set<String> initialVehicleIds = new HashSet<String>();
+    private final Set<String> initialVehicleIds = new HashSet<String>();
 
     /**
      * true if a vehicle(-type) is allowed to take over the whole route that was previously served by another vehicle
@@ -93,7 +93,7 @@ final class VehicleTypeDependentJobInsertionCalculator implements JobInsertionCo
     }
 
     public InsertionData getInsertionData(final VehicleRoute currentRoute, final Job jobToInsert, final Vehicle vehicle, double newVehicleDepartureTime, final Driver driver, final double bestKnownCost) {
-        if(vehicle != null){
+        if (vehicle != null) {
             return insertionCalculator.getInsertionData(currentRoute, jobToInsert, vehicle, newVehicleDepartureTime, driver, bestKnownCost);
         }
         Vehicle selectedVehicle = currentRoute.getVehicle();
@@ -126,7 +126,7 @@ final class VehicleTypeDependentJobInsertionCalculator implements JobInsertionCo
         return bestIData;
     }
 
-    VehicleFleetManager getFleetManager(){
+    VehicleFleetManager getFleetManager() {
         return fleetManager;
     }
 

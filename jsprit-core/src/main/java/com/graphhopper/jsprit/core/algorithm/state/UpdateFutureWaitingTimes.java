@@ -30,11 +30,11 @@ import com.graphhopper.jsprit.core.problem.solution.route.activity.TourActivity;
  */
 public class UpdateFutureWaitingTimes implements ReverseActivityVisitor, StateUpdater {
 
-    private StateManager states;
+    private final StateManager states;
 
     private VehicleRoute route;
 
-    private VehicleRoutingTransportCosts transportCosts;
+    private final VehicleRoutingTransportCosts transportCosts;
 
     private double futureWaiting;
 
@@ -53,9 +53,9 @@ public class UpdateFutureWaitingTimes implements ReverseActivityVisitor, StateUp
     @Override
     public void visit(TourActivity activity) {
         states.putInternalTypedActivityState(activity, route.getVehicle(), InternalStates.FUTURE_WAITING, futureWaiting);
-		if(!(activity instanceof BreakActivity)) {
+        if (!(activity instanceof BreakActivity)) {
             futureWaiting += Math.max(activity.getTheoreticalEarliestOperationStartTime() - activity.getArrTime(), 0);
-		}
+        }
     }
 
     @Override

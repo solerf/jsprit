@@ -31,15 +31,15 @@ import java.util.concurrent.ExecutorService;
 
 public class BestInsertionBuilder {
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
-    private StateManager stateManager;
+    private final StateManager stateManager;
 
     private boolean local = true;
 
-    private ConstraintManager constraintManager;
+    private final ConstraintManager constraintManager;
 
-    private VehicleFleetManager fleetManager;
+    private final VehicleFleetManager fleetManager;
 
     private double weightOfFixedCosts;
 
@@ -59,7 +59,7 @@ public class BestInsertionBuilder {
 
     private int nNeighbors;
 
-    private boolean timeScheduling = false;
+    private final boolean timeScheduling = false;
 
     private boolean allowVehicleSwitch = true;
 
@@ -80,8 +80,6 @@ public class BestInsertionBuilder {
         return this;
     }
 
-    ;
-
     public BestInsertionBuilder setRouteLevel(int forwardLooking, int memory, boolean addDefaultMarginalCostCalculation) {
         local = false;
         this.forwaredLooking = forwardLooking;
@@ -90,14 +88,10 @@ public class BestInsertionBuilder {
         return this;
     }
 
-    ;
-
     public BestInsertionBuilder setLocalLevel() {
         local = true;
         return this;
     }
-
-    ;
 
     /**
      * If addDefaulMarginalCostCalculation is false, no calculator is set which implicitly assumes that marginal cost calculation
@@ -122,8 +116,6 @@ public class BestInsertionBuilder {
         this.actInsertionCostsCalculator = activityInsertionCostsCalculator;
         return this;
     }
-
-    ;
 
     public BestInsertionBuilder setConcurrentMode(ExecutorService executor, int nuOfThreads) {
         this.executor = executor;

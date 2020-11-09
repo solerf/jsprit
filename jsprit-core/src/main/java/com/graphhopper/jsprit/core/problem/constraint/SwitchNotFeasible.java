@@ -27,7 +27,7 @@ import com.graphhopper.jsprit.core.problem.misc.JobInsertionContext;
  */
 public class SwitchNotFeasible implements HardRouteConstraint {
 
-    private StateManager stateManager;
+    private final StateManager stateManager;
 
     public SwitchNotFeasible(StateManager stateManager) {
         this.stateManager = stateManager;

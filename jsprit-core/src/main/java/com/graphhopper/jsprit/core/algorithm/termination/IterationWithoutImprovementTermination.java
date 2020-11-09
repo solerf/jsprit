@@ -33,9 +33,9 @@ import org.slf4j.LoggerFactory;
  */
 public class IterationWithoutImprovementTermination implements PrematureAlgorithmTermination {
 
-    private static Logger log = LoggerFactory.getLogger(IterationWithoutImprovementTermination.class);
+    private static final Logger log = LoggerFactory.getLogger(IterationWithoutImprovementTermination.class);
 
-    private int noIterationWithoutImprovement;
+    private final int noIterationWithoutImprovement;
 
     private int iterationsWithoutImprovement = 0;
 

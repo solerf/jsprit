@@ -53,7 +53,7 @@ public class VehicleRoutingAlgorithmListeners {
     }
 
 
-    private TreeSet<PrioritizedVRAListener> algorithmListeners = new TreeSet<PrioritizedVRAListener>(new Comparator<PrioritizedVRAListener>() {
+    private final TreeSet<PrioritizedVRAListener> algorithmListeners = new TreeSet<PrioritizedVRAListener>(new Comparator<PrioritizedVRAListener>() {
 
         @Override
         public int compare(PrioritizedVRAListener o1, PrioritizedVRAListener o2) {

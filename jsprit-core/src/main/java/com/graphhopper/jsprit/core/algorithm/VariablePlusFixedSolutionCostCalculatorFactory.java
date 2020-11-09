@@ -33,7 +33,7 @@ import com.graphhopper.jsprit.core.problem.vehicle.Vehicle;
  */
 public class VariablePlusFixedSolutionCostCalculatorFactory {
 
-    private RouteAndActivityStateGetter stateManager;
+    private final RouteAndActivityStateGetter stateManager;
 
     public VariablePlusFixedSolutionCostCalculatorFactory(RouteAndActivityStateGetter stateManager) {
         super();

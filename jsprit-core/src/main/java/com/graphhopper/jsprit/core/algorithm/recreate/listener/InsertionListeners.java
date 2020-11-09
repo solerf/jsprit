@@ -29,7 +29,7 @@ import java.util.List;
 
 public class InsertionListeners {
 
-    private Collection<InsertionListener> listeners = new ArrayList<>();
+    private final Collection<InsertionListener> listeners = new ArrayList<>();
 
     public Collection<InsertionListener> getListeners() {
         return listeners;

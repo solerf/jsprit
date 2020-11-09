@@ -31,7 +31,7 @@ import com.graphhopper.jsprit.core.problem.job.Service;
  */
 public class AvgServiceDistance implements JobDistance {
 
-    private VehicleRoutingTransportCosts costs;
+    private final VehicleRoutingTransportCosts costs;
 
     public AvgServiceDistance(VehicleRoutingTransportCosts costs) {
         super();

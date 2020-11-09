@@ -25,7 +25,7 @@ import com.graphhopper.jsprit.core.problem.job.Service;
 
 public final class PickupService extends AbstractActivity implements PickupActivity {
 
-    private Service pickup;
+    private final Service pickup;
 
     private double arrTime;
 

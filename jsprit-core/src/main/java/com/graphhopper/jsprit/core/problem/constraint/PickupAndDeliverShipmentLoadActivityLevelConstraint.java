@@ -37,9 +37,9 @@ import com.graphhopper.jsprit.core.problem.solution.route.state.RouteAndActivity
  */
 public class PickupAndDeliverShipmentLoadActivityLevelConstraint implements HardActivityConstraint {
 
-    private RouteAndActivityStateGetter stateManager;
+    private final RouteAndActivityStateGetter stateManager;
 
-    private Capacity defaultValue;
+    private final Capacity defaultValue;
 
     /**
      * Constructs the constraint ensuring capacity constraint at each activity.

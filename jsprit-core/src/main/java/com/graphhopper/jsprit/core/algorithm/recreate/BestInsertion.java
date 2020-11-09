@@ -37,11 +37,11 @@ import java.util.List;
  */
 public final class BestInsertion extends AbstractInsertionStrategy {
 
-    private static Logger logger = LoggerFactory.getLogger(BestInsertion.class);
+    private static final Logger logger = LoggerFactory.getLogger(BestInsertion.class);
 
-    private JobInsertionCostsCalculator bestInsertionCostCalculator;
+    private final JobInsertionCostsCalculator bestInsertionCostCalculator;
 
-    private NoiseMaker noiseMaker = new NoiseMaker() {
+    private final NoiseMaker noiseMaker = new NoiseMaker() {
 
         @Override
         public double makeNoise() {
@@ -95,8 +95,7 @@ public final class BestInsertion extends AbstractInsertionStrategy {
             if (bestInsertion == null) {
                 badJobs.add(unassignedJob);
                 markUnassigned(unassignedJob, empty.getFailedConstraintNames());
-            }
-            else insertJob(unassignedJob, bestInsertion.getInsertionData(), bestInsertion.getRoute());
+            } else insertJob(unassignedJob, bestInsertion.getInsertionData(), bestInsertion.getRoute());
         }
         return badJobs;
     }

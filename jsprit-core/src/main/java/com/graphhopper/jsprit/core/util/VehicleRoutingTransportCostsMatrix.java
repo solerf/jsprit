@@ -86,11 +86,8 @@ public class VehicleRoutingTransportCostsMatrix extends AbstractForwardVehicleRo
             } else if (!from.equals(other.from))
                 return false;
             if (to == null) {
-                if (other.to != null)
-                    return false;
-            } else if (!to.equals(other.to))
-                return false;
-            return true;
+                return other.to == null;
+            } else return to.equals(other.to);
         }
     }
 
@@ -101,13 +98,13 @@ public class VehicleRoutingTransportCostsMatrix extends AbstractForwardVehicleRo
      * @author schroeder
      */
     public static class Builder {
-        private static Logger log = LoggerFactory.getLogger(Builder.class);
+        private static final Logger log = LoggerFactory.getLogger(Builder.class);
 
-        private boolean isSymmetric;
+        private final boolean isSymmetric;
 
-        private Map<RelationKey, Double> distances = new HashMap<RelationKey, Double>();
+        private final Map<RelationKey, Double> distances = new HashMap<RelationKey, Double>();
 
-        private Map<RelationKey, Double> times = new HashMap<RelationKey, Double>();
+        private final Map<RelationKey, Double> times = new HashMap<RelationKey, Double>();
 
         private boolean distancesSet = false;
 
@@ -184,15 +181,15 @@ public class VehicleRoutingTransportCostsMatrix extends AbstractForwardVehicleRo
 
     }
 
-    private Map<RelationKey, Double> distances = new HashMap<RelationKey, Double>();
+    private final Map<RelationKey, Double> distances = new HashMap<RelationKey, Double>();
 
-    private Map<RelationKey, Double> times = new HashMap<RelationKey, Double>();
+    private final Map<RelationKey, Double> times = new HashMap<RelationKey, Double>();
 
-    private boolean isSymmetric;
+    private final boolean isSymmetric;
 
-    private boolean timesSet;
+    private final boolean timesSet;
 
-    private boolean distancesSet;
+    private final boolean distancesSet;
 
     private VehicleRoutingTransportCostsMatrix(Builder builder) {
         this.isSymmetric = builder.isSymmetric;

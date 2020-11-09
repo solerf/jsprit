@@ -88,7 +88,7 @@ public class TestCalculatesServiceInsertionOnRouteLevel {
                 return 0;
             }
 
-            VehicleRoutingTransportCosts routingCosts = CostFactory.createManhattanCosts();
+            final VehicleRoutingTransportCosts routingCosts = CostFactory.createManhattanCosts();
 
             @Override
             public double getTransportTime(Location from, Location to, double departureTime, Driver driver, Vehicle vehicle) {

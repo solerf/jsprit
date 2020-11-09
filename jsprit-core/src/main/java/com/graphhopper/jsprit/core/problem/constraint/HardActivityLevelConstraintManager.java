@@ -28,11 +28,11 @@ import java.util.List;
 
 class HardActivityLevelConstraintManager implements HardActivityConstraint {
 
-    private Collection<HardActivityConstraint> criticalConstraints = new ArrayList<HardActivityConstraint>();
+    private final Collection<HardActivityConstraint> criticalConstraints = new ArrayList<HardActivityConstraint>();
 
-    private Collection<HardActivityConstraint> highPrioConstraints = new ArrayList<HardActivityConstraint>();
+    private final Collection<HardActivityConstraint> highPrioConstraints = new ArrayList<HardActivityConstraint>();
 
-    private Collection<HardActivityConstraint> lowPrioConstraints = new ArrayList<HardActivityConstraint>();
+    private final Collection<HardActivityConstraint> lowPrioConstraints = new ArrayList<HardActivityConstraint>();
 
     public void addConstraint(HardActivityConstraint constraint, ConstraintManager.Priority priority) {
         if (priority.equals(ConstraintManager.Priority.CRITICAL)) {

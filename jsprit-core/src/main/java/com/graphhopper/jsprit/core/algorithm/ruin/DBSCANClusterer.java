@@ -42,9 +42,9 @@ public class DBSCANClusterer {
 
         private final Job job;
 
-        private List<Location> locations;
+        private final List<Location> locations;
 
-        private int id;
+        private final int id;
 
         public LocationWrapper(Job job, List<Location> locations) {
             this.locations = locations;
@@ -81,9 +81,9 @@ public class DBSCANClusterer {
 
     private static class MyDistance implements DistanceMeasure {
 
-        private Map<Integer, LocationWrapper> locations;
+        private final Map<Integer, LocationWrapper> locations;
 
-        private VehicleRoutingTransportCosts costs;
+        private final VehicleRoutingTransportCosts costs;
 
         public MyDistance(List<LocationWrapper> locations, VehicleRoutingTransportCosts costs) {
             this.locations = new HashMap<Integer, LocationWrapper>();
@@ -109,11 +109,11 @@ public class DBSCANClusterer {
         }
     }
 
-    private VehicleRoutingTransportCosts costs;
+    private final VehicleRoutingTransportCosts costs;
 
     private int minNoOfJobsInCluster = 1;
 
-    private int noDistanceSamples = 10;
+    private final int noDistanceSamples = 10;
 
     private double epsFactor = 0.8;
 

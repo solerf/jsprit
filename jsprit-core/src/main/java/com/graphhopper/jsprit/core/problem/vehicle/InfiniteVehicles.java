@@ -18,8 +18,6 @@
 package com.graphhopper.jsprit.core.problem.vehicle;
 
 
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,12 +27,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
 class InfiniteVehicles implements VehicleFleetManager {
 
-    private static Logger logger = LoggerFactory.getLogger(InfiniteVehicles.class);
+    private static final Logger logger = LoggerFactory.getLogger(InfiniteVehicles.class);
 
-    private Map<VehicleTypeKey, Vehicle> types = new HashMap<>();
+    private final Map<VehicleTypeKey, Vehicle> types = new HashMap<>();
 
 
     InfiniteVehicles(Collection<Vehicle> vehicles) {

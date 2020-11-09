@@ -20,6 +20,6 @@ package com.graphhopper.jsprit.core.util;
 
 public interface Locations {
 
-    public abstract Coordinate getCoord(String id);
+    Coordinate getCoord(String id);
 
 }

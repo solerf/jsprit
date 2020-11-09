@@ -82,8 +82,6 @@ public final class Start extends AbstractActivity implements TourActivity {
         this.location = location;
     }
 
-    ;
-
     public double getTheoreticalLatestOperationStartTime() {
         return theoretical_latestOperationStartTime;
     }

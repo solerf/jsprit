@@ -186,7 +186,7 @@ public class Capacity {
 
     }
 
-    private int[] dimensions;
+    private final int[] dimensions;
 
     /**
      * copy constructor

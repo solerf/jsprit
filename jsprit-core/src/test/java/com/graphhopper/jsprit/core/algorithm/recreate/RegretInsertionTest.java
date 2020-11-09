@@ -113,11 +113,11 @@ public class RegretInsertionTest {
             .addVehicle(v1).addVehicle(v2).setFleetSize(VehicleRoutingProblem.FleetSize.FINITE).build();
 
         StateManager stateManager = new StateManager(vrp);
-        ConstraintManager constraintManager = new ConstraintManager(vrp,stateManager);
+        ConstraintManager constraintManager = new ConstraintManager(vrp, stateManager);
 
         VehicleRoutingAlgorithm vra = Jsprit.Builder.newInstance(vrp)
             .addCoreStateAndConstraintStuff(true)
-            .setProperty(Jsprit.Parameter.FAST_REGRET,"true")
+            .setProperty(Jsprit.Parameter.FAST_REGRET, "true")
             .setStateAndConstraintManager(stateManager, constraintManager).buildAlgorithm();
 
         VehicleRoutingProblemSolution solution = Solutions.bestOf(vra.searchSolutions());
@@ -127,11 +127,11 @@ public class RegretInsertionTest {
 
     static class JobInRouteUpdater implements StateUpdater, ActivityVisitor {
 
-        private StateManager stateManager;
+        private final StateManager stateManager;
 
-        private StateId job1AssignedId;
+        private final StateId job1AssignedId;
 
-        private StateId job2AssignedId;
+        private final StateId job2AssignedId;
 
         private VehicleRoute route;
 
@@ -148,11 +148,11 @@ public class RegretInsertionTest {
 
         @Override
         public void visit(TourActivity activity) {
-            if(((TourActivity.JobActivity)activity).getJob().getId().equals("s1")){
-                stateManager.putProblemState(job1AssignedId,Boolean.class,true);
+            if (((TourActivity.JobActivity) activity).getJob().getId().equals("s1")) {
+                stateManager.putProblemState(job1AssignedId, Boolean.class, true);
             }
-            if(((TourActivity.JobActivity)activity).getJob().getId().equals("s2")){
-                stateManager.putProblemState(job2AssignedId,Boolean.class,true);
+            if (((TourActivity.JobActivity) activity).getJob().getId().equals("s2")) {
+                stateManager.putProblemState(job2AssignedId, Boolean.class, true);
             }
 
         }
@@ -163,13 +163,13 @@ public class RegretInsertionTest {
         }
     }
 
-    static class RouteConstraint implements HardRouteConstraint{
+    static class RouteConstraint implements HardRouteConstraint {
 
         private final StateId job1AssignedId;
 
         private final StateId job2AssignedId;
 
-        private StateManager stateManager;
+        private final StateManager stateManager;
 
         public RouteConstraint(StateId job1Assigned, StateId job2Assigned, StateManager stateManager) {
             this.job1AssignedId = job1Assigned;
@@ -179,22 +179,22 @@ public class RegretInsertionTest {
 
         @Override
         public boolean fulfilled(JobInsertionContext insertionContext) {
-            if(insertionContext.getJob().getId().equals("s1")){
-                Boolean job2Assigned = stateManager.getProblemState(job2AssignedId,Boolean.class);
-                if(job2Assigned == null || job2Assigned == false) return true;
+            if (insertionContext.getJob().getId().equals("s1")) {
+                Boolean job2Assigned = stateManager.getProblemState(job2AssignedId, Boolean.class);
+                if (job2Assigned == null || job2Assigned == false) return true;
                 else {
-                    for(Job j : insertionContext.getRoute().getTourActivities().getJobs()){
-                        if(j.getId().equals("s2")) return true;
+                    for (Job j : insertionContext.getRoute().getTourActivities().getJobs()) {
+                        if (j.getId().equals("s2")) return true;
                     }
                 }
                 return false;
             }
-            if(insertionContext.getJob().getId().equals("s2")){
-                Boolean job1Assigned = stateManager.getProblemState(job1AssignedId,Boolean.class);
-                if(job1Assigned == null || job1Assigned == false) return true;
+            if (insertionContext.getJob().getId().equals("s2")) {
+                Boolean job1Assigned = stateManager.getProblemState(job1AssignedId, Boolean.class);
+                if (job1Assigned == null || job1Assigned == false) return true;
                 else {
-                    for(Job j : insertionContext.getRoute().getTourActivities().getJobs()){
-                        if(j.getId().equals("s1")) return true;
+                    for (Job j : insertionContext.getRoute().getTourActivities().getJobs()) {
+                        if (j.getId().equals("s1")) return true;
                     }
                 }
                 return false;
@@ -205,12 +205,12 @@ public class RegretInsertionTest {
 
     @Test
     public void solutionWithConstraintAndWithFastRegretMustBeCorrect() {
-        Service s1 = Service.Builder.newInstance("s1").addSizeDimension(0,1).setLocation(Location.newInstance(0, 10)).build();
-        Service s2 = Service.Builder.newInstance("s2").addSizeDimension(0,1).setLocation(Location.newInstance(0, -10)).build();
-        Service s3 = Service.Builder.newInstance("s3").addSizeDimension(0,1).setLocation(Location.newInstance(0, -11)).build();
-        Service s4 = Service.Builder.newInstance("s4").addSizeDimension(0,1).setLocation(Location.newInstance(0, 11)).build();
+        Service s1 = Service.Builder.newInstance("s1").addSizeDimension(0, 1).setLocation(Location.newInstance(0, 10)).build();
+        Service s2 = Service.Builder.newInstance("s2").addSizeDimension(0, 1).setLocation(Location.newInstance(0, -10)).build();
+        Service s3 = Service.Builder.newInstance("s3").addSizeDimension(0, 1).setLocation(Location.newInstance(0, -11)).build();
+        Service s4 = Service.Builder.newInstance("s4").addSizeDimension(0, 1).setLocation(Location.newInstance(0, 11)).build();
 
-        VehicleType type = VehicleTypeImpl.Builder.newInstance("type").addCapacityDimension(0,2).build();
+        VehicleType type = VehicleTypeImpl.Builder.newInstance("type").addCapacityDimension(0, 2).build();
         VehicleImpl v1 = VehicleImpl.Builder.newInstance("v1").setType(type).setStartLocation(Location.newInstance(0, 10)).build();
         VehicleImpl v2 = VehicleImpl.Builder.newInstance("v2").setType(type).setStartLocation(Location.newInstance(0, -10)).build();
         final VehicleRoutingProblem vrp = VehicleRoutingProblem.Builder.newInstance().addJob(s1).addJob(s2).addJob(s3).addJob(s4)
@@ -219,9 +219,9 @@ public class RegretInsertionTest {
         final StateManager stateManager = new StateManager(vrp);
         StateId job1Assigned = stateManager.createStateId("job1-assigned");
         StateId job2Assigned = stateManager.createStateId("job2-assigned");
-        stateManager.addStateUpdater(new JobInRouteUpdater(stateManager,job1Assigned,job2Assigned));
-        ConstraintManager constraintManager = new ConstraintManager(vrp,stateManager);
-        constraintManager.addConstraint(new RouteConstraint(job1Assigned,job2Assigned,stateManager));
+        stateManager.addStateUpdater(new JobInRouteUpdater(stateManager, job1Assigned, job2Assigned));
+        ConstraintManager constraintManager = new ConstraintManager(vrp, stateManager);
+        constraintManager.addConstraint(new RouteConstraint(job1Assigned, job2Assigned, stateManager));
         constraintManager.setDependencyType("s1", DependencyType.INTRA_ROUTE);
         constraintManager.setDependencyType("s2", DependencyType.INTRA_ROUTE);
 
@@ -240,12 +240,11 @@ public class RegretInsertionTest {
             .buildAlgorithm();
 
         VehicleRoutingProblemSolution solution = Solutions.bestOf(vra.searchSolutions());
-        for(VehicleRoute route : solution.getRoutes()){
-            if(route.getTourActivities().servesJob(s1)){
-                if(!route.getTourActivities().servesJob(s2)){
+        for (VehicleRoute route : solution.getRoutes()) {
+            if (route.getTourActivities().servesJob(s1)) {
+                if (!route.getTourActivities().servesJob(s2)) {
                     Assert.assertFalse(true);
-                }
-                else Assert.assertTrue(true);
+                } else Assert.assertTrue(true);
             }
         }
 //        Assert.assertEquals(1, solution.getRoutes().size());
@@ -253,12 +252,12 @@ public class RegretInsertionTest {
 
     @Test
     public void solutionWithConstraintAndWithFastRegretConcurrentMustBeCorrect() {
-        Service s1 = Service.Builder.newInstance("s1").addSizeDimension(0,1).setLocation(Location.newInstance(0, 10)).build();
-        Service s2 = Service.Builder.newInstance("s2").addSizeDimension(0,1).setLocation(Location.newInstance(0, -10)).build();
-        Service s3 = Service.Builder.newInstance("s3").addSizeDimension(0,1).setLocation(Location.newInstance(0, -11)).build();
-        Service s4 = Service.Builder.newInstance("s4").addSizeDimension(0,1).setLocation(Location.newInstance(0, 11)).build();
+        Service s1 = Service.Builder.newInstance("s1").addSizeDimension(0, 1).setLocation(Location.newInstance(0, 10)).build();
+        Service s2 = Service.Builder.newInstance("s2").addSizeDimension(0, 1).setLocation(Location.newInstance(0, -10)).build();
+        Service s3 = Service.Builder.newInstance("s3").addSizeDimension(0, 1).setLocation(Location.newInstance(0, -11)).build();
+        Service s4 = Service.Builder.newInstance("s4").addSizeDimension(0, 1).setLocation(Location.newInstance(0, 11)).build();
 
-        VehicleType type = VehicleTypeImpl.Builder.newInstance("type").addCapacityDimension(0,2).build();
+        VehicleType type = VehicleTypeImpl.Builder.newInstance("type").addCapacityDimension(0, 2).build();
         VehicleImpl v1 = VehicleImpl.Builder.newInstance("v1").setType(type).setStartLocation(Location.newInstance(0, 10)).build();
         VehicleImpl v2 = VehicleImpl.Builder.newInstance("v2").setType(type).setStartLocation(Location.newInstance(0, -10)).build();
         final VehicleRoutingProblem vrp = VehicleRoutingProblem.Builder.newInstance().addJob(s1).addJob(s2).addJob(s3).addJob(s4)
@@ -267,26 +266,25 @@ public class RegretInsertionTest {
         final StateManager stateManager = new StateManager(vrp);
         StateId job1Assigned = stateManager.createStateId("job1-assigned");
         StateId job2Assigned = stateManager.createStateId("job2-assigned");
-        stateManager.addStateUpdater(new JobInRouteUpdater(stateManager,job1Assigned,job2Assigned));
-        ConstraintManager constraintManager = new ConstraintManager(vrp,stateManager);
-        constraintManager.addConstraint(new RouteConstraint(job1Assigned,job2Assigned,stateManager));
+        stateManager.addStateUpdater(new JobInRouteUpdater(stateManager, job1Assigned, job2Assigned));
+        ConstraintManager constraintManager = new ConstraintManager(vrp, stateManager);
+        constraintManager.addConstraint(new RouteConstraint(job1Assigned, job2Assigned, stateManager));
         constraintManager.setDependencyType("s1", DependencyType.INTRA_ROUTE);
         constraintManager.setDependencyType("s2", DependencyType.INTRA_ROUTE);
 
         VehicleRoutingAlgorithm vra = Jsprit.Builder.newInstance(vrp)
             .addCoreStateAndConstraintStuff(true)
             .setProperty(Jsprit.Parameter.FAST_REGRET, "true")
-            .setProperty(Jsprit.Parameter.THREADS,"4")
+            .setProperty(Jsprit.Parameter.THREADS, "4")
             .setStateAndConstraintManager(stateManager, constraintManager)
             .buildAlgorithm();
 
         VehicleRoutingProblemSolution solution = Solutions.bestOf(vra.searchSolutions());
-        for(VehicleRoute route : solution.getRoutes()){
-            if(route.getTourActivities().servesJob(s1)){
-                if(!route.getTourActivities().servesJob(s2)){
+        for (VehicleRoute route : solution.getRoutes()) {
+            if (route.getTourActivities().servesJob(s1)) {
+                if (!route.getTourActivities().servesJob(s2)) {
                     Assert.assertFalse(true);
-                }
-                else Assert.assertTrue(true);
+                } else Assert.assertTrue(true);
             }
         }
     }

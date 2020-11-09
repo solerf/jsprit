@@ -43,14 +43,14 @@ import java.util.Collection;
  */
 class UpdateLoads implements ActivityVisitor, StateUpdater, InsertionStartsListener, JobInsertedListener {
 
-    private StateManager stateManager;
+    private final StateManager stateManager;
 
     /*
      * default has one dimension with a value of zero
      */
     private Capacity currentLoad;
 
-    private Capacity defaultValue;
+    private final Capacity defaultValue;
 
     private VehicleRoute route;
 
@@ -114,7 +114,7 @@ class UpdateLoads implements ActivityVisitor, StateUpdater, InsertionStartsListe
         }
     }
 
-    public void informRouteChanged(VehicleRoute route){
+    public void informRouteChanged(VehicleRoute route) {
         insertionStarts(route);
     }
 

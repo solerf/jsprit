@@ -39,7 +39,7 @@ public class Skills {
             return new Builder();
         }
 
-        private Set<String> skills = new HashSet<>();
+        private final Set<String> skills = new HashSet<>();
 
         /**
          * Adds skill. Skill is transformed into lowerCase.
@@ -74,7 +74,7 @@ public class Skills {
 
     }
 
-    private Set<String> skills = new HashSet<>();
+    private final Set<String> skills = new HashSet<>();
 
     private Skills(Builder builder) {
         skills.addAll(builder.skills);

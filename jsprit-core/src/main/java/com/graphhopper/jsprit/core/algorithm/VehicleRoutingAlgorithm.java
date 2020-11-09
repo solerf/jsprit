@@ -47,10 +47,9 @@ import java.util.Set;
 public class VehicleRoutingAlgorithm {
 
 
-
     private static class TerminationManager implements PrematureAlgorithmTermination {
 
-        private Collection<PrematureAlgorithmTermination> terminationCriteria = new ArrayList<PrematureAlgorithmTermination>();
+        private final Collection<PrematureAlgorithmTermination> terminationCriteria = new ArrayList<PrematureAlgorithmTermination>();
 
         void addTermination(PrematureAlgorithmTermination termination) {
             terminationCriteria.add(termination);
@@ -135,15 +134,15 @@ public class VehicleRoutingAlgorithm {
         this.objectiveFunction = objectiveFunction;
     }
 
-  /**
-   * Adds solution to the collection of initial solutions.
-   *
-   * This method may lead to errors if tour activities in the solution are different to the
-   * ones in the VRP (including differences in indexing)
-   *
-   * @param solution the solution to be added
-   */
-  public void addInitialSolution(VehicleRoutingProblemSolution solution) {
+    /**
+     * Adds solution to the collection of initial solutions.
+     * <p>
+     * This method may lead to errors if tour activities in the solution are different to the
+     * ones in the VRP (including differences in indexing)
+     *
+     * @param solution the solution to be added
+     */
+    public void addInitialSolution(VehicleRoutingProblemSolution solution) {
         // We will make changes so let's make a copy
         solution = VehicleRoutingProblemSolution.copyOf(solution);
         verifyAndAdaptSolution(solution);
@@ -360,7 +359,7 @@ public class VehicleRoutingAlgorithm {
         return maxIterations;
     }
 
-    public SolutionCostCalculator getObjectiveFunction(){
+    public SolutionCostCalculator getObjectiveFunction() {
         return objectiveFunction;
     }
 

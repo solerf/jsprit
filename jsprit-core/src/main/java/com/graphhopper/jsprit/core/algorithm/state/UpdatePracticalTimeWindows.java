@@ -30,13 +30,13 @@ import com.graphhopper.jsprit.core.problem.solution.route.activity.TourActivity;
  */
 class UpdatePracticalTimeWindows implements ReverseActivityVisitor, StateUpdater {
 
-    private StateManager states;
+    private final StateManager states;
 
     private VehicleRoute route;
 
-    private VehicleRoutingTransportCosts transportCosts;
+    private final VehicleRoutingTransportCosts transportCosts;
 
-    private VehicleRoutingActivityCosts activityCosts;
+    private final VehicleRoutingActivityCosts activityCosts;
 
     private double latestArrTimeAtPrevAct;
 
@@ -58,7 +58,7 @@ class UpdatePracticalTimeWindows implements ReverseActivityVisitor, StateUpdater
 
     @Override
     public void visit(TourActivity activity) {
-        double potentialLatestArrivalTimeAtCurrAct = latestArrTimeAtPrevAct - transportCosts.getBackwardTransportTime(activity.getLocation(), prevAct.getLocation(), latestArrTimeAtPrevAct, route.getDriver(), route.getVehicle()) - activityCosts.getActivityDuration(activity,latestArrTimeAtPrevAct,route.getDriver(),route.getVehicle());
+        double potentialLatestArrivalTimeAtCurrAct = latestArrTimeAtPrevAct - transportCosts.getBackwardTransportTime(activity.getLocation(), prevAct.getLocation(), latestArrTimeAtPrevAct, route.getDriver(), route.getVehicle()) - activityCosts.getActivityDuration(activity, latestArrTimeAtPrevAct, route.getDriver(), route.getVehicle());
         double latestArrivalTime = Math.min(activity.getTheoreticalLatestOperationStartTime(), potentialLatestArrivalTimeAtCurrAct);
 
         states.putInternalTypedActivityState(activity, InternalStates.LATEST_OPERATION_START_TIME, latestArrivalTime);

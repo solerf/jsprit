@@ -29,12 +29,10 @@ import com.graphhopper.jsprit.core.problem.job.Service;
 import com.graphhopper.jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import com.graphhopper.jsprit.core.problem.vehicle.VehicleImpl;
 import com.graphhopper.jsprit.core.problem.vehicle.VehicleTypeImpl;
-
 import com.graphhopper.jsprit.core.util.Solutions;
 import com.graphhopper.jsprit.core.util.VehicleRoutingTransportCostsMatrix;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,9 +47,9 @@ public class RefuseCollection_IT {
     @Test
     public void whenReadingServices_itShouldCalculateCorrectly() {
 
-		/*
+        /*
          * create vehicle-type and vehicle
-		 */
+         */
         VehicleTypeImpl.Builder typeBuilder = VehicleTypeImpl.Builder.newInstance("vehicle-type").addCapacityDimension(0, 23);
         typeBuilder.setCostPerDistance(1.0);
         VehicleTypeImpl bigType = typeBuilder.build();
@@ -61,20 +59,20 @@ public class RefuseCollection_IT {
         vehicleBuilder.setType(bigType);
         VehicleImpl bigVehicle = vehicleBuilder.build();
 
-		/*
+        /*
          * start building the problem
-		 */
+         */
         VehicleRoutingProblem.Builder vrpBuilder = VehicleRoutingProblem.Builder.newInstance();
         vrpBuilder.setFleetSize(VehicleRoutingProblem.FleetSize.INFINITE);
         vrpBuilder.addVehicle(bigVehicle);
 
-		/*
+        /*
          * create cost-matrix
-		 */
+         */
         VehicleRoutingTransportCostsMatrix.Builder matrixBuilder = VehicleRoutingTransportCostsMatrix.Builder.newInstance(true);
         /*
          * read demand quantities
-		 */
+         */
         readDemandQuantitiesAsServices(vrpBuilder);
         readDistances(matrixBuilder);
 
@@ -91,9 +89,9 @@ public class RefuseCollection_IT {
     @Test
     public void whenReadingServices_usingJsprit_itShouldCalculateCorrectly() {
 
-		/*
+        /*
          * create vehicle-type and vehicle
-		 */
+         */
         VehicleTypeImpl.Builder typeBuilder = VehicleTypeImpl.Builder.newInstance("vehicle-type").addCapacityDimension(0, 23);
         typeBuilder.setCostPerDistance(1.0);
         VehicleTypeImpl bigType = typeBuilder.build();
@@ -103,20 +101,20 @@ public class RefuseCollection_IT {
         vehicleBuilder.setType(bigType);
         VehicleImpl bigVehicle = vehicleBuilder.build();
 
-		/*
+        /*
          * start building the problem
-		 */
+         */
         VehicleRoutingProblem.Builder vrpBuilder = VehicleRoutingProblem.Builder.newInstance();
         vrpBuilder.setFleetSize(VehicleRoutingProblem.FleetSize.INFINITE);
         vrpBuilder.addVehicle(bigVehicle);
 
-		/*
+        /*
          * create cost-matrix
-		 */
+         */
         VehicleRoutingTransportCostsMatrix.Builder matrixBuilder = VehicleRoutingTransportCostsMatrix.Builder.newInstance(true);
         /*
-		 * read demand quantities
-		 */
+         * read demand quantities
+         */
         readDemandQuantitiesAsServices(vrpBuilder);
         readDistances(matrixBuilder);
 
@@ -133,9 +131,9 @@ public class RefuseCollection_IT {
     @Test
     public void whenReadingPickups_itShouldCalculateCorrectly() {
 
-		/*
-		 * create vehicle-type and vehicle
-		 */
+        /*
+         * create vehicle-type and vehicle
+         */
         VehicleTypeImpl.Builder typeBuilder = VehicleTypeImpl.Builder.newInstance("vehicle-type").addCapacityDimension(0, 23);
         typeBuilder.setCostPerDistance(1.0);
         VehicleTypeImpl bigType = typeBuilder.build();
@@ -145,20 +143,20 @@ public class RefuseCollection_IT {
         vehicleBuilder.setType(bigType);
         VehicleImpl bigVehicle = vehicleBuilder.build();
 
-		/*
-		 * start building the problem
-		 */
+        /*
+         * start building the problem
+         */
         VehicleRoutingProblem.Builder vrpBuilder = VehicleRoutingProblem.Builder.newInstance();
         vrpBuilder.setFleetSize(VehicleRoutingProblem.FleetSize.INFINITE);
         vrpBuilder.addVehicle(bigVehicle);
 
-		/*
-		 * create cost-matrix
-		 */
+        /*
+         * create cost-matrix
+         */
         VehicleRoutingTransportCostsMatrix.Builder matrixBuilder = VehicleRoutingTransportCostsMatrix.Builder.newInstance(true);
-		/*
-		 * read demand quantities
-		 */
+        /*
+         * read demand quantities
+         */
         readDemandQuantitiesAsPickups(vrpBuilder);
         readDistances(matrixBuilder);
 
@@ -175,9 +173,9 @@ public class RefuseCollection_IT {
     @Test
     public void whenReadingDeliveries_itShouldCalculateCorrectly() {
 
-		/*
-		 * create vehicle-type and vehicle
-		 */
+        /*
+         * create vehicle-type and vehicle
+         */
         VehicleTypeImpl.Builder typeBuilder = VehicleTypeImpl.Builder.newInstance("vehicle-type").addCapacityDimension(0, 23);
         typeBuilder.setCostPerDistance(1.0);
         VehicleTypeImpl bigType = typeBuilder.build();
@@ -187,20 +185,20 @@ public class RefuseCollection_IT {
         vehicleBuilder.setType(bigType);
         VehicleImpl bigVehicle = vehicleBuilder.build();
 
-		/*
-		 * start building the problem
-		 */
+        /*
+         * start building the problem
+         */
         VehicleRoutingProblem.Builder vrpBuilder = VehicleRoutingProblem.Builder.newInstance();
         vrpBuilder.setFleetSize(VehicleRoutingProblem.FleetSize.INFINITE);
         vrpBuilder.addVehicle(bigVehicle);
 
-		/*
-		 * create cost-matrix
-		 */
+        /*
+         * create cost-matrix
+         */
         VehicleRoutingTransportCostsMatrix.Builder matrixBuilder = VehicleRoutingTransportCostsMatrix.Builder.newInstance(true);
-		/*
-		 * read demand quantities
-		 */
+        /*
+         * read demand quantities
+         */
         readDemandQuantitiesAsDeliveries(vrpBuilder);
         readDistances(matrixBuilder);
 
@@ -225,14 +223,14 @@ public class RefuseCollection_IT {
                 continue;
             }
             String[] lineTokens = line.split(",");
-			/*
-			 * build service
-			 */
+            /*
+             * build service
+             */
             Service service = Service.Builder.newInstance(lineTokens[0]).addSizeDimension(0, Integer.parseInt(lineTokens[1]))
                 .setLocation(Location.newInstance(lineTokens[0])).build();
-			/*
-			 * and add it to problem
-			 */
+            /*
+             * and add it to problem
+             */
             vrpBuilder.addJob(service);
         }
         close(reader);
@@ -252,14 +250,14 @@ public class RefuseCollection_IT {
                 continue;
             }
             String[] lineTokens = line.split(",");
-			/*
-			 * build service
-			 */
+            /*
+             * build service
+             */
             Pickup service = Pickup.Builder.newInstance(lineTokens[0]).addSizeDimension(0, Integer.parseInt(lineTokens[1]))
                 .setLocation(Location.newInstance(lineTokens[0])).build();
-			/*
-			 * and add it to problem
-			 */
+            /*
+             * and add it to problem
+             */
             vrpBuilder.addJob(service);
         }
         close(reader);
@@ -275,14 +273,14 @@ public class RefuseCollection_IT {
                 continue;
             }
             String[] lineTokens = line.split(",");
-			/*
-			 * build service
-			 */
-            Delivery service = (Delivery) Delivery.Builder.newInstance(lineTokens[0]).addSizeDimension(0, Integer.parseInt(lineTokens[1]))
+            /*
+             * build service
+             */
+            Delivery service = Delivery.Builder.newInstance(lineTokens[0]).addSizeDimension(0, Integer.parseInt(lineTokens[1]))
                 .setLocation(Location.newInstance(lineTokens[0])).build();
-			/*
-			 * and add it to problem
-			 */
+            /*
+             * and add it to problem
+             */
             vrpBuilder.addJob(service);
         }
         close(reader);

@@ -31,11 +31,11 @@ import java.util.*;
 
 public class RuinAndRecreateModule implements SearchStrategyModule {
 
-    private InsertionStrategy insertion;
+    private final InsertionStrategy insertion;
 
-    private RuinStrategy ruin;
+    private final RuinStrategy ruin;
 
-    private String moduleName;
+    private final String moduleName;
 
     private Random random = new Random(4711);
 

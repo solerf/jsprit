@@ -59,7 +59,7 @@ public class StateManagerTest {
     private VehicleRoutingProblem vrpMock;
 
     @Before
-    public void doBefore(){
+    public void doBefore() {
         vrpMock = mock(VehicleRoutingProblem.class);
         when(vrpMock.getFleetSize()).thenReturn(VehicleRoutingProblem.FleetSize.INFINITE);
     }
@@ -337,7 +337,7 @@ public class StateManagerTest {
     }
 
     @Test
-    public void arrayIniShouldWork(){
+    public void arrayIniShouldWork() {
         VehicleType type = VehicleTypeImpl.Builder.newInstance("t").setCostPerDistance(4.).build();
         VehicleImpl vehicle = VehicleImpl.Builder.newInstance("v").setStartLocation(Location.newInstance("loc")).build();
         VehicleImpl vehicle2 = VehicleImpl.Builder.newInstance("v2").setStartLocation(Location.newInstance("loc")).setType(type).build();
@@ -351,9 +351,9 @@ public class StateManagerTest {
 
         StateManager stateManager = new StateManager(vrp);
         StateId myState = null;
-        for(int i=0;i<10;i++){
-            myState = stateManager.createStateId("myState"+i);
+        for (int i = 0; i < 10; i++) {
+            myState = stateManager.createStateId("myState" + i);
         }
-        stateManager.putTypedInternalRouteState(route,myState,1.);
+        stateManager.putTypedInternalRouteState(route, myState, 1.);
     }
 }

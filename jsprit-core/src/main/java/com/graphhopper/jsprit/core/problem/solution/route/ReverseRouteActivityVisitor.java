@@ -27,7 +27,7 @@ import java.util.Iterator;
 
 public class ReverseRouteActivityVisitor implements RouteVisitor {
 
-    private Collection<ReverseActivityVisitor> visitors = new ArrayList<ReverseActivityVisitor>();
+    private final Collection<ReverseActivityVisitor> visitors = new ArrayList<ReverseActivityVisitor>();
 
     @Override
     public void visit(VehicleRoute route) {

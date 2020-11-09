@@ -44,7 +44,7 @@ import java.util.*;
  */
 public final class RuinString extends AbstractRuinStrategy {
 
-    private static Logger logger = LoggerFactory.getLogger(RuinString.class);
+    private static final Logger logger = LoggerFactory.getLogger(RuinString.class);
 
     private final VehicleRoutingProblem vrp;
 

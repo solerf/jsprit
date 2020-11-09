@@ -44,15 +44,12 @@ import java.util.List;
 public class Service extends AbstractJob {
 
 
-
     /**
      * Builder that builds a service.
      *
      * @author schroeder
      */
     public static class Builder<T extends Service> {
-
-
 
 
         /**
@@ -65,7 +62,7 @@ public class Service extends AbstractJob {
             return new Builder(id);
         }
 
-        private String id;
+        private final String id;
 
         protected String locationId;
 
@@ -94,15 +91,15 @@ public class Service extends AbstractJob {
         private int priority = 2;
         protected Object userData;
 
-		protected double maxTimeInVehicle = Double.MAX_VALUE;
+        protected double maxTimeInVehicle = Double.MAX_VALUE;
 
         protected Activity activity;
 
-		Builder(String id){
-			this.id = id;
-			timeWindows = new TimeWindowsImpl();
-			timeWindows.add(TimeWindow.newInstance(0.0, Double.MAX_VALUE));
-		}
+        Builder(String id) {
+            this.id = id;
+            timeWindows = new TimeWindowsImpl();
+            timeWindows.add(TimeWindow.newInstance(0.0, Double.MAX_VALUE));
+        }
 
         /**
          * Protected method to set the type-name of the service.
@@ -153,9 +150,8 @@ public class Service extends AbstractJob {
          * but never interacts with it in any way.
          * </p>
          *
-         * @param userData
-         *            any object holding the domain specific user data
-         *            associated with the object.
+         * @param userData any object holding the domain specific user data
+         *                 associated with the object.
          * @return builder
          */
         public Builder<T> setUserData(Object userData) {
@@ -177,7 +173,7 @@ public class Service extends AbstractJob {
             return this;
         }
 
-        public Builder<T> setTimeWindow(TimeWindow tw){
+        public Builder<T> setTimeWindow(TimeWindow tw) {
             if (tw == null) throw new IllegalArgumentException("The time window must not be null.");
             this.timeWindows = new TimeWindowsImpl();
             timeWindows.add(tw);
@@ -186,7 +182,7 @@ public class Service extends AbstractJob {
 
         public Builder<T> addTimeWindow(TimeWindow timeWindow) {
             if (timeWindow == null) throw new IllegalArgumentException("The time window must not be null.");
-            if(!twAdded){
+            if (!twAdded) {
                 timeWindows = new TimeWindowsImpl();
                 twAdded = true;
             }
@@ -233,13 +229,13 @@ public class Service extends AbstractJob {
             return this;
         }
 
-        public Builder<T> addAllRequiredSkills(Skills skills){
+        public Builder<T> addAllRequiredSkills(Skills skills) {
             skillBuilder.addAllSkills(skills.values());
             return this;
         }
 
-        public Builder<T> addAllSizeDimensions(Capacity size){
-            for(int i=0;i<size.getNuOfDimensions();i++){
+        public Builder<T> addAllSizeDimensions(Capacity size) {
+            for (int i = 0; i < size.getNuOfDimensions(); i++) {
                 addSizeDimension(i, size.get(i));
             }
             return this;
@@ -260,7 +256,7 @@ public class Service extends AbstractJob {
             return this;
         }
 
-        public Builder<T> setMaxTimeInVehicle(double maxTimeInVehicle){
+        public Builder<T> setMaxTimeInVehicle(double maxTimeInVehicle) {
             throw new UnsupportedOperationException("The maximum time in vehicle is not yet supported for Pickups and Services (only for Deliveries and Shipments).");
 //            if(maxTimeInVehicle < 0) throw new IllegalArgumentException("maxTimeInVehicle should be positive");
 //            this.maxTimeInVehicle = maxTimeInVehicle;
@@ -301,12 +297,12 @@ public class Service extends AbstractJob {
         location = builder.location;
         timeWindows = builder.timeWindows;
         priority = builder.priority;
-	    maxTimeInVehicle = builder.maxTimeInVehicle;
+        maxTimeInVehicle = builder.maxTimeInVehicle;
         activities.add(builder.activity);
         activities = Collections.unmodifiableList(activities);
-	}
+    }
 
-    public Collection<TimeWindow> getTimeWindows(){
+    public Collection<TimeWindow> getTimeWindows() {
         return timeWindows.getTimeWindows();
     }
 
@@ -339,7 +335,6 @@ public class Service extends AbstractJob {
      * It is recommended to use getTimeWindows() instead. If you still use this, it returns the first time window of getTimeWindows() collection.
      *
      * @return time window
-     *
      */
     public TimeWindow getTimeWindow() {
         return timeWindows.getTimeWindows().iterator().next();
@@ -360,8 +355,8 @@ public class Service extends AbstractJob {
     @Override
     public String toString() {
         return "[id=" + id + "][name=" + name + "][type=" + type + "][location=" + location
-                + "][capacity=" + size + "][serviceTime=" + serviceTime + "][timeWindows="
-                + timeWindows + "]";
+            + "][capacity=" + size + "][serviceTime=" + serviceTime + "][timeWindows="
+            + timeWindows + "]";
     }
 
     @Override
@@ -385,11 +380,8 @@ public class Service extends AbstractJob {
             return false;
         Service other = (Service) obj;
         if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+            return other.id == null;
+        } else return id.equals(other.id);
     }
 
     @Override

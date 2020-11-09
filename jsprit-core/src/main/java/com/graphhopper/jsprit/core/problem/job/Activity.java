@@ -26,14 +26,14 @@ import java.util.Collection;
 public class Activity {
 
     public enum Type {
-        PICKUP, DELIVERY, SERVICE, BREAK;
+        PICKUP, DELIVERY, SERVICE, BREAK
     }
 
     public static class Builder {
 
         private final Type activityType;
 
-        private Location location;
+        private final Location location;
 
         Collection<TimeWindow> timeWindows;
 
@@ -59,13 +59,13 @@ public class Activity {
         }
     }
 
-    private Location location;
+    private final Location location;
 
-    private Collection<TimeWindow> timeWindows;
+    private final Collection<TimeWindow> timeWindows;
 
-    private double serviceTime;
+    private final double serviceTime;
 
-    private Activity.Type activityType;
+    private final Activity.Type activityType;
 
     Activity(Builder builder) {
         location = builder.location;

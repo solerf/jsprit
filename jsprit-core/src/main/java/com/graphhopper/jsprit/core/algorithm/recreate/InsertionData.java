@@ -40,7 +40,7 @@ public class InsertionData {
 
     }
 
-    private static InsertionData noInsertion = new NoInsertionFound();
+    private static final InsertionData noInsertion = new NoInsertionFound();
 
     /**
      * Returns an instance of InsertionData that represents an EmptyInsertionData (which might indicate
@@ -70,13 +70,13 @@ public class InsertionData {
 
     private double additionalTime;
 
-    private List<Event> events = new ArrayList<Event>();
+    private final List<Event> events = new ArrayList<Event>();
 
     List<Event> getEvents() {
         return events;
     }
 
-    private List<String> reasons = new ArrayList<>();
+    private final List<String> reasons = new ArrayList<>();
 
     /**
      * @return the additionalTime

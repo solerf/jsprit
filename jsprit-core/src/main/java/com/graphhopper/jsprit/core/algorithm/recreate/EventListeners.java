@@ -26,7 +26,7 @@ import java.util.List;
  */
 class EventListeners {
 
-    private List<EventListener> listeners = new ArrayList<EventListener>();
+    private final List<EventListener> listeners = new ArrayList<EventListener>();
 
     public EventListeners() {
         listeners.add(new InsertActivityListener());

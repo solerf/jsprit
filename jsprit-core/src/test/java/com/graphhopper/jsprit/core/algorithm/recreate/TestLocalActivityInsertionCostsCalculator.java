@@ -637,7 +637,7 @@ public class TestLocalActivityInsertionCostsCalculator {
 
         StateManager stateManager = getStateManager(vrp, route);
         stateManager.updateTimeWindowStates();
-        stateManager.informInsertionStarts(Arrays.asList(route),new ArrayList<Job>());
+        stateManager.informInsertionStarts(Arrays.asList(route), new ArrayList<Job>());
 
         LocalActivityInsertionCostsCalculator calc = new LocalActivityInsertionCostsCalculator(CostFactory.createEuclideanCosts(), new WaitingTimeCosts(), stateManager);
         calc.setSolutionCompletenessRatio(1.);

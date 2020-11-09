@@ -77,17 +77,17 @@ public class LiLimReader {
 
     }
 
-    private static Logger logger = LoggerFactory.getLogger(LiLimReader.class);
+    private static final Logger logger = LoggerFactory.getLogger(LiLimReader.class);
 
-    private Builder vrpBuilder;
+    private final Builder vrpBuilder;
 
     private int vehicleCapacity;
 
     private String depotId;
 
-    private Map<String, CustomerData> customers;
+    private final Map<String, CustomerData> customers;
 
-    private Collection<Relation> relations;
+    private final Collection<Relation> relations;
 
     private double depotOpeningTime;
 

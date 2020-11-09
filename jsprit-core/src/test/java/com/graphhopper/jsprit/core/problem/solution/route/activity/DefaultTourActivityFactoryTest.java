@@ -40,7 +40,7 @@ public class DefaultTourActivityFactoryTest {
     @Test
     public void whenCreatingActivityWithPickup_itShouldReturnPickupService() {
         DefaultTourActivityFactory factory = new DefaultTourActivityFactory();
-        Pickup service = (Pickup) Pickup.Builder.newInstance("service").setLocation(Location.newInstance("loc")).build();
+        Pickup service = Pickup.Builder.newInstance("service").setLocation(Location.newInstance("loc")).build();
         TourActivity act = factory.createActivity(service);
         assertNotNull(act);
         assertTrue(act instanceof PickupService);
@@ -49,7 +49,7 @@ public class DefaultTourActivityFactoryTest {
     @Test
     public void whenCreatingActivityWithDelivery_itShouldReturnDeliverService() {
         DefaultTourActivityFactory factory = new DefaultTourActivityFactory();
-        Delivery service = (Delivery) Delivery.Builder.newInstance("service").setLocation(Location.newInstance("loc")).build();
+        Delivery service = Delivery.Builder.newInstance("service").setLocation(Location.newInstance("loc")).build();
         TourActivity act = factory.createActivity(service);
         assertNotNull(act);
         assertTrue(act instanceof DeliverService);

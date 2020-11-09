@@ -76,6 +76,6 @@ public class SelectRandomlyTest {
         SelectRandomly selectRandomly = new SelectRandomly();
         selectRandomly.setRandom(random);
 
-        assertNull(selectRandomly.selectSolution(Collections.<VehicleRoutingProblemSolution>emptyList()));
+        assertNull(selectRandomly.selectSolution(Collections.emptyList()));
     }
 }

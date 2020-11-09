@@ -38,23 +38,23 @@ import java.util.List;
 public class ConstraintManager implements HardActivityConstraint, HardRouteConstraint, SoftActivityConstraint, SoftRouteConstraint {
 
 
-    public static enum Priority {
+    public enum Priority {
         CRITICAL, HIGH, LOW
     }
 
-    private static Logger log = LoggerFactory.getLogger(ConstraintManager.class);
+    private static final Logger log = LoggerFactory.getLogger(ConstraintManager.class);
 
-    private HardActivityLevelConstraintManager actLevelConstraintManager = new HardActivityLevelConstraintManager();
+    private final HardActivityLevelConstraintManager actLevelConstraintManager = new HardActivityLevelConstraintManager();
 
-    private HardRouteLevelConstraintManager hardRouteConstraintManager = new HardRouteLevelConstraintManager();
+    private final HardRouteLevelConstraintManager hardRouteConstraintManager = new HardRouteLevelConstraintManager();
 
-    private SoftActivityConstraintManager softActivityConstraintManager = new SoftActivityConstraintManager();
+    private final SoftActivityConstraintManager softActivityConstraintManager = new SoftActivityConstraintManager();
 
-    private SoftRouteConstraintManager softRouteConstraintManager = new SoftRouteConstraintManager();
+    private final SoftRouteConstraintManager softRouteConstraintManager = new SoftRouteConstraintManager();
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
-    private RouteAndActivityStateGetter stateManager;
+    private final RouteAndActivityStateGetter stateManager;
 
     private boolean loadConstraintsSet = false;
 
@@ -100,16 +100,16 @@ public class ConstraintManager implements HardActivityConstraint, HardRouteConst
         return dependencyTypes;
     }
 
-    public void setDependencyType(String jobId, DependencyType dependencyType){
+    public void setDependencyType(String jobId, DependencyType dependencyType) {
         Job job = vrp.getJobs().get(jobId);
-        if(job != null) {
+        if (job != null) {
             dependencyTypes[job.getIndex()] = dependencyType;
         }
     }
 
-    public DependencyType getDependencyType(String jobId){
+    public DependencyType getDependencyType(String jobId) {
         Job job = vrp.getJobs().get(jobId);
-        if(job != null){
+        if (job != null) {
             return dependencyTypes[job.getIndex()];
         }
         return DependencyType.NO_TYPE;

@@ -55,8 +55,6 @@ public class SolutionAnalyser {
     private final static String LOAD_DELIVERED = "load-delivered";
 
 
-
-
     private static class LoadAndActivityCounter implements StateUpdater, ActivityVisitor {
 
         private final StateManager stateManager;
@@ -73,17 +71,17 @@ public class SolutionAnalyser {
 
         private Capacity delivered;
 
-        private StateId pickup_count_id;
+        private final StateId pickup_count_id;
 
-        private StateId pickup_at_beginning_count_id;
+        private final StateId pickup_at_beginning_count_id;
 
-        private StateId delivery_count_id;
+        private final StateId delivery_count_id;
 
-        private StateId delivery_at_end_count_id;
+        private final StateId delivery_at_end_count_id;
 
-        private StateId load_picked_id;
+        private final StateId load_picked_id;
 
-        private StateId load_delivered_id;
+        private final StateId load_delivered_id;
 
         private VehicleRoute route;
 
@@ -215,19 +213,19 @@ public class SolutionAnalyser {
 
     private static class SumUpActivityTimes implements StateUpdater, ActivityVisitor {
 
-        private StateId waiting_time_id;
+        private final StateId waiting_time_id;
 
-        private StateId transport_time_id;
+        private final StateId transport_time_id;
 
-        private StateId service_time_id;
+        private final StateId service_time_id;
 
-        private StateId too_late_id;
+        private final StateId too_late_id;
 
-        private StateManager stateManager;
+        private final StateManager stateManager;
 
         private final VehicleRoutingActivityCosts activityCosts;
 
-        private ActivityTimeTracker.ActivityPolicy activityPolicy;
+        private final ActivityTimeTracker.ActivityPolicy activityPolicy;
 
         private VehicleRoute route;
 
@@ -341,7 +339,7 @@ public class SolutionAnalyser {
         }
 
         private double distance(TourActivity activity) {
-            return distanceCalculator.getDistance(prevAct.getLocation(), activity.getLocation(),prevActDeparture, route.getVehicle());
+            return distanceCalculator.getDistance(prevAct.getLocation(), activity.getLocation(), prevActDeparture, route.getVehicle());
         }
 
         @Override
@@ -355,13 +353,13 @@ public class SolutionAnalyser {
 
     private static class DistanceUpdater implements StateUpdater, ActivityVisitor {
 
-        private StateId distanceId;
+        private final StateId distanceId;
 
-        private StateManager stateManager;
+        private final StateManager stateManager;
 
         private double sumDistance = 0.;
 
-        private TransportDistance distanceCalculator;
+        private final TransportDistance distanceCalculator;
 
         private TourActivity prevAct;
 
@@ -390,7 +388,7 @@ public class SolutionAnalyser {
 
         @Override
         public void finish() {
-            double distance = distanceCalculator.getDistance(prevAct.getLocation(), route.getEnd().getLocation(),prevAct.getEndTime(), route.getVehicle());
+            double distance = distanceCalculator.getDistance(prevAct.getLocation(), route.getEnd().getLocation(), prevAct.getEndTime(), route.getVehicle());
             sumDistance += distance;
             stateManager.putRouteState(route, distanceId, sumDistance);
         }
@@ -398,9 +396,9 @@ public class SolutionAnalyser {
 
     private static class SkillUpdater implements StateUpdater, ActivityVisitor {
 
-        private StateManager stateManager;
+        private final StateManager stateManager;
 
-        private StateId skill_id;
+        private final StateId skill_id;
 
         private VehicleRoute route;
 
@@ -440,11 +438,11 @@ public class SolutionAnalyser {
 
     private static final Logger log = LoggerFactory.getLogger(SolutionAnalyser.class);
 
-    private VehicleRoutingProblem vrp;
+    private final VehicleRoutingProblem vrp;
 
     private StateManager stateManager;
 
-    private TransportDistance distanceCalculator;
+    private final TransportDistance distanceCalculator;
 
     private StateId waitingTimeId;
 
@@ -505,7 +503,6 @@ public class SolutionAnalyser {
      * @param vrp
      * @param solution
      * @param distanceCalculator
-     *
      */
     public SolutionAnalyser(VehicleRoutingProblem vrp, VehicleRoutingProblemSolution solution, TransportDistance distanceCalculator) {
         this.vrp = vrp;
@@ -563,7 +560,7 @@ public class SolutionAnalyser {
 
     private void recalculateSolutionIndicators() {
         for (VehicleRoute route : solution.getRoutes()) {
-            maxOperationTime = Math.max(maxOperationTime,getOperationTime(route));
+            maxOperationTime = Math.max(maxOperationTime, getOperationTime(route));
             tp_distance += getDistance(route);
             tp_time += getTransportTime(route);
             waiting_time += getWaitingTime(route);
@@ -685,8 +682,7 @@ public class SolutionAnalyser {
         Capacity afterAct = stateManager.getActivityState(activity, InternalStates.LOAD, Capacity.class);
         if (afterAct != null && activity.getSize() != null) {
             return Capacity.subtract(afterAct, activity.getSize());
-        } else if (afterAct != null) return afterAct;
-        else return null;
+        } else return afterAct;
     }
 
     /**
@@ -1131,7 +1127,9 @@ public class SolutionAnalyser {
         return operation_time;
     }
 
-    public Double getMaxOperationTime() { return maxOperationTime; }
+    public Double getMaxOperationTime() {
+        return maxOperationTime;
+    }
 
     /**
      * @return total waiting time for specified solution

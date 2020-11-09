@@ -41,7 +41,7 @@ public class Pickup extends Service {
             super(id);
         }
 
-        public Builder setMaxTimeInVehicle(double maxTimeInVehicle){
+        public Builder setMaxTimeInVehicle(double maxTimeInVehicle) {
             throw new UnsupportedOperationException("maxTimeInVehicle is not yet supported for Pickups and Services (only for Deliveries and Shipments)");
 //            if(maxTimeInVehicle < 0) throw new IllegalArgumentException("maxTimeInVehicle should be positive");
 //            this.maxTimeInVehicle = maxTimeInVehicle;
