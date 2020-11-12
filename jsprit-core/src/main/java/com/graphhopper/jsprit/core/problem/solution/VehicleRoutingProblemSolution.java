@@ -43,18 +43,22 @@ public class VehicleRoutingProblemSolution {
 
     private final Collection<VehicleRoute> routes;
 
-    private Collection<Job> unassignedJobs = new ArrayList<Job>();
+    private Collection<Job> unassignedJobs = new ArrayList<>();
 
     private double cost;
 
+    private final String problemId;
+
     private VehicleRoutingProblemSolution(VehicleRoutingProblemSolution solution) {
-        routes = new ArrayList<VehicleRoute>();
+        this.problemId = solution.problemId;
+        this.routes = new ArrayList<>();
         for (VehicleRoute r : solution.getRoutes()) {
             VehicleRoute route = VehicleRoute.copyOf(r);
-            routes.add(route);
+            this.routes.add(route);
         }
         this.cost = solution.getCost();
-        unassignedJobs.addAll(solution.getUnassignedJobs());
+        this.unassignedJobs.addAll(solution.getUnassignedJobs());
+
     }
 
     /**
@@ -63,8 +67,9 @@ public class VehicleRoutingProblemSolution {
      * @param routes routes being part of the solution
      * @param cost   total costs of solution
      */
-    public VehicleRoutingProblemSolution(Collection<VehicleRoute> routes, double cost) {
+    public VehicleRoutingProblemSolution(String problemId, Collection<VehicleRoute> routes, double cost) {
         super();
+        this.problemId = problemId;
         this.routes = routes;
         this.cost = cost;
     }
@@ -76,8 +81,9 @@ public class VehicleRoutingProblemSolution {
      * @param unassignedJobs jobs that could not be assigned to any vehicle
      * @param cost           total costs of solution
      */
-    public VehicleRoutingProblemSolution(Collection<VehicleRoute> routes, Collection<Job> unassignedJobs, double cost) {
+    public VehicleRoutingProblemSolution(String problemId, Collection<VehicleRoute> routes, Collection<Job> unassignedJobs, double cost) {
         super();
+        this.problemId = problemId;
         this.routes = routes;
         this.unassignedJobs = unassignedJobs;
         this.cost = cost;
@@ -119,8 +125,12 @@ public class VehicleRoutingProblemSolution {
         return unassignedJobs;
     }
 
+    public String getProblemId() {
+        return problemId;
+    }
+
     @Override
     public String toString() {
-        return "[costs=" + cost + "][routes=" + routes.size() + "][unassigned=" + unassignedJobs.size() + "]";
+        return "[problemId=" + problemId + "][costs=" + cost + "][routes=" + routes.size() + "][unassigned=" + unassignedJobs.size() + "]";
     }
 }

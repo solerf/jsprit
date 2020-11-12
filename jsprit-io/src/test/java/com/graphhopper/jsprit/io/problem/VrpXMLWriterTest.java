@@ -555,7 +555,7 @@ public class VrpXMLWriterTest {
         VehicleRoute route = VehicleRoute.Builder.newInstance(v1).addService(s1).addService(s2).build();
         List<VehicleRoute> routes = new ArrayList<VehicleRoute>();
         routes.add(route);
-        VehicleRoutingProblemSolution solution = new VehicleRoutingProblemSolution(routes, 10.);
+        VehicleRoutingProblemSolution solution = new VehicleRoutingProblemSolution("any-id", routes, 10.);
         List<VehicleRoutingProblemSolution> solutions = new ArrayList<VehicleRoutingProblemSolution>();
         solutions.add(solution);
 
@@ -582,7 +582,7 @@ public class VrpXMLWriterTest {
         VehicleRoute route = VehicleRoute.Builder.newInstance(v1).addService(s1).build();
         List<VehicleRoute> routes = new ArrayList<VehicleRoute>();
         routes.add(route);
-        VehicleRoutingProblemSolution solution = new VehicleRoutingProblemSolution(routes, 10.);
+        VehicleRoutingProblemSolution solution = new VehicleRoutingProblemSolution("any-id", routes, 10.);
         solution.getUnassignedJobs().add(s2);
         List<VehicleRoutingProblemSolution> solutions = new ArrayList<VehicleRoutingProblemSolution>();
         solutions.add(solution);

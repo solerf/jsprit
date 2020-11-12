@@ -310,7 +310,7 @@ public class VrpXMLReader {
                 }
                 routes.add(routeBuilder.build());
             }
-            VehicleRoutingProblemSolution solution = new VehicleRoutingProblemSolution(routes, cost);
+            VehicleRoutingProblemSolution solution = new VehicleRoutingProblemSolution("any-id", routes, cost);
             List<HierarchicalConfiguration> unassignedJobConfigs = solutionConfig.configurationsAt("unassignedJobs.job");
             for (HierarchicalConfiguration unassignedJobConfig : unassignedJobConfigs) {
                 String jobId = unassignedJobConfig.getString("[@id]");

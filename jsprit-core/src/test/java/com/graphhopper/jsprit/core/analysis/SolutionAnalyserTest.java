@@ -43,6 +43,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -110,7 +111,7 @@ public class SolutionAnalyserTest {
         VehicleRoute route2 = VehicleRoute.Builder.newInstance(vehicle).setJobActivityFactory(vrp.getJobActivityFactory())
             .addService(s3).addPickup(shipment2).addDelivery(shipment2).addService(s4).build();
 
-        solution = new VehicleRoutingProblemSolution(Arrays.asList(route1, route2), 42);
+        solution = new VehicleRoutingProblemSolution("any-id", Arrays.asList(route1, route2), 42);
     }
 
 
@@ -169,7 +170,7 @@ public class SolutionAnalyserTest {
             .addPickup(s1)
             .build();
 
-        solution = new VehicleRoutingProblemSolution(Arrays.asList(route), 300);
+        solution = new VehicleRoutingProblemSolution("any-id", Collections.singletonList(route), 300);
     }
 
     /**
@@ -1623,7 +1624,7 @@ public class SolutionAnalyserTest {
         VehicleRoute vehicleRoute = VehicleRoute.Builder.newInstance(vehicle).build();
 
         VehicleRoutingProblem vrp = VehicleRoutingProblem.Builder.newInstance().addVehicle(vehicle).build();
-        VehicleRoutingProblemSolution solution = new VehicleRoutingProblemSolution(Arrays.asList(vehicleRoute), 0);
+        VehicleRoutingProblemSolution solution = new VehicleRoutingProblemSolution("any-id", Collections.singletonList(vehicleRoute), 0);
         SolutionAnalyser analyser = new SolutionAnalyser(vrp, solution, new TransportDistance() {
             @Override
             public double getDistance(Location from, Location to, double departureTime, Vehicle vehicle) {

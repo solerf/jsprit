@@ -57,8 +57,7 @@ public class VehicleRoutingProblem {
      *
      * @author stefan schroeder
      */
-    public static class Builder {
-
+    public static final class Builder {
 
         /**
          * Returns a new instance of this builder.
@@ -133,6 +132,8 @@ public class VehicleRoutingProblem {
 
         private final Set<Location> allLocations = new HashSet<>();
 
+        private String problemId;
+
         /**
          * Returns the unmodifiable map of collected locations (mapped by their location-id).
          *
@@ -151,7 +152,7 @@ public class VehicleRoutingProblem {
          * @return locations
          */
         public Locations getLocations() {
-            return id -> tentative_coordinates.get(id);
+            return tentative_coordinates::get;
         }
 
         /**
@@ -398,6 +399,16 @@ public class VehicleRoutingProblem {
             return this;
         }
 
+        public Builder setProblemId(String problemId){
+            if(Objects.nonNull(this.problemId) && !this.problemId.trim().equals("")){
+                logger.warn("Informed problemId is empty, a random one will be generated");
+                this.problemId = UUID.randomUUID().toString();
+            }else{
+                this.problemId = problemId;
+            }
+            return this;
+        }
+
         /**
          * Builds the {@link VehicleRoutingProblem}.
          * <p>
@@ -426,6 +437,7 @@ public class VehicleRoutingProblem {
             boolean hasBreaks = addBreaksToActivityMap();
             if (hasBreaks && fleetSize.equals(FleetSize.INFINITE))
                 throw new UnsupportedOperationException("Breaks are not yet supported when dealing with infinite fleet. Either set it to finite or omit breaks.");
+
             return new VehicleRoutingProblem(this);
         }
 
@@ -548,6 +560,8 @@ public class VehicleRoutingProblem {
 
     private final JobActivityFactory jobActivityFactory = this::copyAndGetActivities;
 
+    private final String problemId;
+
     private VehicleRoutingProblem(Builder builder) {
         this.jobs = builder.jobs;
         this.fleetSize = builder.fleetSize;
@@ -561,13 +575,14 @@ public class VehicleRoutingProblem {
         this.allLocations = builder.allLocations;
         this.allJobs = new HashMap<>(jobs);
         this.allJobs.putAll(builder.jobsInInitialRoutes);
+        this.problemId = builder.problemId;
         logger.info("setup problem: {}", this);
     }
 
 
     @Override
     public String toString() {
-        return "[fleetSize=" + fleetSize + "][#jobs=" + jobs.size() + "][#vehicles=" + vehicles.size() + "][#vehicleTypes=" + vehicleTypes.size() + "][" +
+        return "[problemId=" + problemId + "][fleetSize=" + fleetSize + "][#jobs=" + jobs.size() + "][#vehicles=" + vehicles.size() + "][#vehicleTypes=" + vehicleTypes.size() + "][" +
             "transportCost=" + transportCosts + "][activityCosts=" + activityCosts + "]";
     }
 
@@ -686,4 +701,7 @@ public class VehicleRoutingProblem {
         return acts;
     }
 
+    public String getProblemId() {
+        return problemId;
+    }
 }

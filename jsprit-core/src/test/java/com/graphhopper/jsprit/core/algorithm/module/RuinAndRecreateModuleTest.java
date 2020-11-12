@@ -44,7 +44,7 @@ public class RuinAndRecreateModuleTest {
         for (int i = 0; i < 20; i++) {
             unassigned.add(mock(Job.class));
         }
-        VehicleRoutingProblemSolution previousSolution = new VehicleRoutingProblemSolution(routes, unassigned, 0);
+        VehicleRoutingProblemSolution previousSolution = new VehicleRoutingProblemSolution("any-id", routes, unassigned, 0);
         VehicleRoutingProblemSolution newSolution = module.runAndGetSolution(previousSolution);
         Assert.assertEquals(0, newSolution.getUnassignedJobs().size());
     }
@@ -61,7 +61,7 @@ public class RuinAndRecreateModuleTest {
         for (int i = 0; i < 20; i++) {
             unassigned.add(mock(Job.class));
         }
-        VehicleRoutingProblemSolution previousSolution = new VehicleRoutingProblemSolution(routes, unassigned, 0);
+        VehicleRoutingProblemSolution previousSolution = new VehicleRoutingProblemSolution("any-id", routes, unassigned, 0);
         VehicleRoutingProblemSolution newSolution = module.runAndGetSolution(previousSolution);
         Assert.assertEquals(15, newSolution.getUnassignedJobs().size());
     }
@@ -78,7 +78,7 @@ public class RuinAndRecreateModuleTest {
         for (int i = 0; i < 20; i++) {
             unassigned.add(mock(Job.class));
         }
-        VehicleRoutingProblemSolution previousSolution = new VehicleRoutingProblemSolution(routes, unassigned, 0);
+        VehicleRoutingProblemSolution previousSolution = new VehicleRoutingProblemSolution("any-id", routes, unassigned, 0);
         VehicleRoutingProblemSolution newSolution = module.runAndGetSolution(previousSolution);
         Assert.assertEquals(10, newSolution.getUnassignedJobs().size());
     }

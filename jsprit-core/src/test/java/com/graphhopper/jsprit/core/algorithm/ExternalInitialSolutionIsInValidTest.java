@@ -29,6 +29,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 
 public class ExternalInitialSolutionIsInValidTest {
@@ -50,7 +51,7 @@ public class ExternalInitialSolutionIsInValidTest {
          */
         VehicleRoute route1 = VehicleRoute.Builder.newInstance(vehicle).setJobActivityFactory(vrp.getJobActivityFactory()).addService(s1).build();
 
-        vra.addInitialSolution(new VehicleRoutingProblemSolution(Arrays.asList(route1), 20.));
+        vra.addInitialSolution(new VehicleRoutingProblemSolution("any-id", Collections.singletonList(route1), 20.));
 
         try {
             vra.searchSolutions();
