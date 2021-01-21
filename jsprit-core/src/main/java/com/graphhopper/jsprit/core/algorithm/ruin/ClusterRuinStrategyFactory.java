@@ -4,17 +4,18 @@ import com.graphhopper.jsprit.core.problem.VehicleRoutingProblem;
 
 public class ClusterRuinStrategyFactory implements RuinStrategyFactory {
 
-    private final int initialNumberJobsToRemove;
-    private final JobNeighborhoods jobNeighborhoods;
+  private final int initialNumberJobsToRemove;
+  private final JobNeighborhoods jobNeighborhoods;
 
-    public ClusterRuinStrategyFactory(int initialNumberJobsToRemove, JobNeighborhoods jobNeighborhoods) {
-        super();
-        this.initialNumberJobsToRemove = initialNumberJobsToRemove;
-        this.jobNeighborhoods = jobNeighborhoods;
-    }
+  public ClusterRuinStrategyFactory(int initialNumberJobsToRemove,
+      JobNeighborhoods jobNeighborhoods) {
+    super();
+    this.initialNumberJobsToRemove = initialNumberJobsToRemove;
+    this.jobNeighborhoods = jobNeighborhoods;
+  }
 
-    @Override
-    public RuinStrategy createStrategy(VehicleRoutingProblem vrp) {
-        return new RuinClusters(vrp, initialNumberJobsToRemove, jobNeighborhoods);
-    }
+  @Override
+  public RuinStrategy createStrategy(VehicleRoutingProblem vrp) {
+    return new RuinClusters(vrp, initialNumberJobsToRemove, jobNeighborhoods);
+  }
 }

@@ -1,19 +1,17 @@
 /*
- * Licensed to GraphHopper GmbH under one or more contributor
- * license agreements. See the NOTICE file distributed with this work for
- * additional information regarding copyright ownership.
+ * Licensed to GraphHopper GmbH under one or more contributor license agreements. See the NOTICE
+ * file distributed with this work for additional information regarding copyright ownership.
  *
- * GraphHopper GmbH licenses this file to you under the Apache License,
- * Version 2.0 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License at
+ * GraphHopper GmbH licenses this file to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy of the
+ * License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 package com.graphhopper.jsprit.core.problem.vehicle;
 
@@ -30,57 +28,59 @@ import com.graphhopper.jsprit.core.problem.job.Break;
  */
 public interface Vehicle extends HasId, HasIndex {
 
-    /**
-     * Returns the earliest departure of vehicle which should be the lower bound of this vehicle's departure times.
-     *
-     * @return earliest departure time
-     */
-    double getEarliestDeparture();
+  /**
+   * Returns the earliest departure of vehicle which should be the lower bound of this vehicle's
+   * departure times.
+   *
+   * @return earliest departure time
+   */
+  double getEarliestDeparture();
 
-    /**
-     * Returns the latest arrival time at this vehicle's end-location which should be the upper bound of this vehicle's arrival times at end-location.
-     *
-     * @return latest arrival time of this vehicle
-     */
-    double getLatestArrival();
+  /**
+   * Returns the latest arrival time at this vehicle's end-location which should be the upper bound
+   * of this vehicle's arrival times at end-location.
+   *
+   * @return latest arrival time of this vehicle
+   */
+  double getLatestArrival();
 
-    /**
-     * Returns the {@link VehicleType} of this vehicle.
-     *
-     * @return {@link VehicleType} of this vehicle
-     */
-    VehicleType getType();
+  /**
+   * Returns the {@link VehicleType} of this vehicle.
+   *
+   * @return {@link VehicleType} of this vehicle
+   */
+  VehicleType getType();
 
-    /**
-     * Returns the id of this vehicle.
-     *
-     * @return id
-     */
-    String getId();
+  /**
+   * Returns the id of this vehicle.
+   *
+   * @return id
+   */
+  String getId();
 
-    /**
-     * Returns true if vehicle returns to depot, false otherwise.
-     *
-     * @return true if isReturnToDepot
-     */
-    boolean isReturnToDepot();
+  /**
+   * Returns true if vehicle returns to depot, false otherwise.
+   *
+   * @return true if isReturnToDepot
+   */
+  boolean isReturnToDepot();
 
-    Location getStartLocation();
+  Location getStartLocation();
 
-    Location getEndLocation();
+  Location getEndLocation();
 
-    VehicleTypeKey getVehicleTypeIdentifier();
+  VehicleTypeKey getVehicleTypeIdentifier();
 
-    Skills getSkills();
+  Skills getSkills();
 
-    /**
-     * @return User-specific domain data associated with the vehicle
-     */
-    Object getUserData();
+  /**
+   * @return User-specific domain data associated with the vehicle
+   */
+  Object getUserData();
 
-    Break getBreak();
-    // Switch to this as soon as we switct to Java 8:
-    // default Object getUserData() {
-    // return null;
-    // };
+  Break getBreak();
+  // Switch to this as soon as we switct to Java 8:
+  // default Object getUserData() {
+  // return null;
+  // };
 }
