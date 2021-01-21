@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.graphhopper</groupId>
-    <artifactId>jsprit</artifactId>
+    <artifactId>jsprit-core</artifactId>
     <version>1.8</version>
 
     <packaging>pom</packaging>
@@ -62,14 +62,6 @@
         <url>https://github.com/graphhopper/jsprit/issues</url>
     </issueManagement>
 
-    <modules>
-        <module>jsprit-core</module>
-        <module>jsprit-analysis</module>
-        <module>jsprit-io</module>
-        <module>jsprit-examples</module>
-        <module>jsprit-instances</module>
-    </modules>
-
     <properties>
         <jdkVersion>1.8</jdkVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -82,7 +74,6 @@
     </properties>
 
     <build>
-
         <extensions>
             <extension>
                 <groupId>io.packagecloud.maven.wagon</groupId>
@@ -107,7 +98,6 @@
                 <directory>src/test/resources</directory>
             </testResource>
         </testResources>
-
 
         <plugins>
             <plugin>
@@ -162,7 +152,7 @@
                 <version>2.10.0</version>
                 <configuration>
                     <!--Using the provided code formatting style to format the code -->
-                    <configFile>${project.basedir}/../google-code-style.xml</configFile>
+                    <configFile>${project.basedir}/google-code-style.xml</configFile>
                 </configuration>
                 <executions>
                     <execution>
@@ -198,6 +188,18 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${logger.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
@@ -226,14 +228,6 @@
 
     <!-- mvn clean deploy -P release -->
     <profiles>
-        <profile>
-            <id>selected-build</id>
-            <modules>
-                <module>jsprit-core</module>
-                <module>jsprit-io</module>
-                <module>jsprit-analysis</module>
-            </modules>
-        </profile>
         <profile>
             <id>release</id>
             <activation>
